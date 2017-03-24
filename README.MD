@@ -16,7 +16,7 @@ To submit changes, you must first do the following:
 
 ## Keeping your fork up to date
 
-Firstly, you want to add an upstream remote by typing _git remote add upstream https://www.github.com/quaker762/escape_. This only needs to be performed ONCE!
+Firstly, you want to add an upstream remote by typing _git remote add upstream https://www.github.com/Palm-Studios2/Escape.git This only needs to be performed ONCE!
 
 1. Run _git checkout master_
 2. Now, run _git fetch --all_
