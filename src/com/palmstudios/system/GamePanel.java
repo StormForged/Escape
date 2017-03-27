@@ -62,15 +62,32 @@ public class GamePanel extends JPanel implements Runnable
 	/**
 	 * Thread run function.
 	 */
-	public void run()
+	public synchronized void run()
 	{
-		init();
+		long currTime;
+		long dt;
 		
+		init();
 		while(running)
 		{
+			currTime = System.nanoTime();
+			
 			update();
 			render();
 			draw();
+			
+			dt = System.nanoTime() - currTime;
+			
+			try
+			{
+				Thread.sleep((1000 / 60) / dt / 1000000); // Try to maintain 60FPS
+			} 
+			catch (InterruptedException e)
+			{
+				System.err.println("Fatal: Game Thread Exception!");
+				e.printStackTrace();
+			}
+			
 		}
 	}
 	
