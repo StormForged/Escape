@@ -16,6 +16,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import com.palmstudios.state.GameStateManager;
+import com.palmstudios.state.TestState;
+
 public class GamePanel extends JPanel implements Runnable
 {
 	
@@ -28,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable
 	
 	private Graphics2D 		g2d;				/**< Graphics of the framebuffer */
 	private BufferedImage	framebuffer;		/**< The Framebuffer we can write to */
+	
+	private GameStateManager gsm = new GameStateManager();
 
 	/**
 	 * Class constructor
@@ -78,13 +83,16 @@ public class GamePanel extends JPanel implements Runnable
 		framebuffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB); // Create our 24-bit framebuffer
 		g2d = (Graphics2D)framebuffer.getGraphics();
 		
-		for(int x = 0; x < WIDTH; x++)
-		{
-			for(int y = 0; y < HEIGHT; y++)
-			{
-				framebuffer.setRGB(x, y, (int) (Math.random() * 0xFFFFFF));
-			}
-		}
+		gsm.loadState(new TestState());
+		gsm.changeState(0);
+		
+//		for(int x = 0; x < WIDTH; x++)
+//		{
+//			for(int y = 0; y < HEIGHT; y++)
+//			{
+//				framebuffer.setRGB(x, y, (int) (Math.random() * 0xFFFFFF));
+//			}
+//		}
 		
 		running = true;
 	}
@@ -95,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable
 	 */
 	public void update()
 	{
-		
+		gsm.getCurrentState().update();
 	}
 	
 	/**
@@ -103,7 +111,7 @@ public class GamePanel extends JPanel implements Runnable
 	 */
 	public void render()
 	{
-		
+		gsm.getCurrentState().draw(g2d);
 	}
 	
 	/**

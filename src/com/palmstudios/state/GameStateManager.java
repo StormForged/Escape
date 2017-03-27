@@ -59,4 +59,17 @@ public class GameStateManager
 		if(statesList.get(stateNum) != null)
 			statesList.remove(stateNum);
 	}
+	
+	/**
+	 * Get the current state.
+	 */
+	public GameState getCurrentState()
+	{
+		if(currentState != null)
+			return currentState;
+		else
+			System.err.println("Error: currentState == null! Perhaps is hasn't been initialised??");
+		
+		return null;
+	}
 }
