@@ -103,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 		framebuffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB); // Create our 24-bit framebuffer
 		g2d = (Graphics2D)framebuffer.getGraphics();
 		
-		gsm.loadState(new TestState());
+		gsm.loadState(new TestState(gsm));
 		gsm.changeState(0);
 		
 		running = true;

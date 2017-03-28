@@ -19,6 +19,12 @@ import com.palmstudios.system.GameState;
  */
 public class TestState extends GameState
 {
+	
+	public TestState(GameStateManager gsm)
+	{
+		this.gsm = gsm;
+		init();
+	}
 
 	@Override
 	public void init()

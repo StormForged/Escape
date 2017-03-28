@@ -11,6 +11,8 @@ package com.palmstudios.system;
 
 import java.awt.Graphics2D;
 
+import com.palmstudios.state.GameStateManager;
+
 /**
  * ALL GAME STATES INHERIT FROM THIS CLASS!!! IT CAN AND SHOULD NEVER BE INSTANTIATED!!!
  * @author Jesse
@@ -18,6 +20,8 @@ import java.awt.Graphics2D;
  */
 public abstract class GameState
 {
+	
+	protected GameStateManager gsm; /**< GameStateManager passed from GamePanel */
 	
 	/**
 	 * State initialisation method. All local state data should be initialised in this function.
