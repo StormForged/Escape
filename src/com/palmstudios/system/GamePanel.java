@@ -12,6 +12,8 @@ package com.palmstudios.system;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ import javax.swing.JPanel;
 import com.palmstudios.state.GameStateManager;
 import com.palmstudios.state.TestState;
 
-public class GamePanel extends JPanel implements Runnable
+public class GamePanel extends JPanel implements Runnable, KeyListener
 {
 	
 	public static final int WIDTH = 512;
@@ -42,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable
 		super(); // Call superconstructor for our JPanel
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Preferred size of this JPanel
 		setFocusable(true); // Lets us request focus of this JPanel
+		addKeyListener(this); // Add a key listener (implemented in this class)
 		requestFocus(); // Manually request focus
 	}
 
@@ -103,14 +106,6 @@ public class GamePanel extends JPanel implements Runnable
 		gsm.loadState(new TestState());
 		gsm.changeState(0);
 		
-//		for(int x = 0; x < WIDTH; x++)
-//		{
-//			for(int y = 0; y < HEIGHT; y++)
-//			{
-//				framebuffer.setRGB(x, y, (int) (Math.random() * 0xFFFFFF));
-//			}
-//		}
-		
 		running = true;
 	}
 	
@@ -139,5 +134,31 @@ public class GamePanel extends JPanel implements Runnable
 		Graphics g = this.getGraphics();
 		g.drawImage(framebuffer, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		g.dispose();
+	}
+
+	/**
+	 * Function called when a key release has been detected by the instance of this component (GamePanel)
+	 * @param k - Key the user has pressed.
+	 */
+	public void keyPressed(KeyEvent k)
+	{
+		System.out.println("Here");
+		gsm.getCurrentState().keyPressed(k.getKeyCode());
+	}
+
+	/**
+	 * Function called when a key release has been detected by the instance of this component (GamePanel)
+	 * @param k - Key the user has released.
+	 */
+	public void keyReleased(KeyEvent k)
+	{
+		gsm.getCurrentState().keyReleased(k.getKeyCode());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent k)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
