@@ -20,6 +20,9 @@ import com.palmstudios.system.GameState;
 public class GameStateManager
 {
 	
+	public static final int SPLASH_STATE 	= 0;
+	public static final int MENU_STATE 		= 1;
+	
 	private ArrayList<GameState> 	statesList;
 	private GameState				currentState;
 	/**
