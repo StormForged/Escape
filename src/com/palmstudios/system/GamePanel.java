@@ -19,7 +19,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import com.palmstudios.state.GameStateManager;
-import com.palmstudios.state.TestState;
+import com.palmstudios.state.MenuState;
+import com.palmstudios.state.SplashState;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener
 {
@@ -103,8 +104,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 		framebuffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB); // Create our 24-bit framebuffer
 		g2d = (Graphics2D)framebuffer.getGraphics();
 		
-		gsm.loadState(new TestState(gsm));
-		gsm.changeState(0);
+		gsm.loadState(new SplashState(gsm));
+		gsm.loadState(new MenuState(gsm));
+		gsm.changeState(GameStateManager.SPLASH_STATE);
 		
 		running = true;
 	}
@@ -142,7 +144,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	 */
 	public void keyPressed(KeyEvent k)
 	{
-		System.out.println("Here");
 		gsm.getCurrentState().keyPressed(k.getKeyCode());
 	}
 
