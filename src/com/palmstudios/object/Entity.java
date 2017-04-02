@@ -15,9 +15,9 @@ package com.palmstudios.object;
  */
 public abstract class Entity
 {
-	private String 	name; 	/**< The name of this entity */
-	private int 	tilex; 	/**< What tile (along the x axis) does this entity lie on? */ 
-	private int 	tiley; 	/**< What tile (along the y axis) does this entity lie on? */ 
+	private String 	name; 		/**< The name of this entity */
+	private int 	x; 			/**< What x value is this entity currently at? */ 
+	private int 	y; 			/**< What y value is this entity currently at? */ 
 	
 	/**
 	 * Basic constructor.
@@ -26,23 +26,23 @@ public abstract class Entity
 	 */
 	protected Entity(String name)
 	{
-		this.name 	= name;
-		tilex 		= 0;
-		tiley 		= 0;
+		this.name	= name;
+		this.x 		= 0;
+		this.y 		= 0;
 	}
 	
 	/**
 	 * Full constructor. Specifies entity location.
 	 * 
 	 * @param name - Name of this entity
-	 * @param tilex - Initial tile (x) of this entity
-	 * @param tiley - Initial tile (y) of this entity
+	 * @param x - Initial tile (x) of this entity
+	 * @param y - Initial tile (y) of this entity
 	 */
-	protected Entity(String name, int tilex, int tiley)
+	protected Entity(String name, int x, int y)
 	{
 		this.name	= name;
-		this.tilex 	= tilex;
-		this.tiley 	= tiley;
+		this.x 	= x;
+		this.y 	= y;
 	}
 	
 	/**
@@ -55,4 +55,11 @@ public abstract class Entity
 	 * Draw this entity to the screen.
 	 */
 	protected abstract void draw();
+	
+	/**
+	 * Entity movement method.
+	 * @param vx - How many pixels we want to move per tick in the x axis.
+	 * @param vy - How many pixels we want to move per tick in the y axis.
+	 */
+	protected abstract void move(double vx, double vy);
 }
