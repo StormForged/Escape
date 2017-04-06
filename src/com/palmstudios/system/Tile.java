@@ -1,3 +1,12 @@
+/**
+ * 	@file
+ * 
+ * 	Base tile class. All tiles inherit from this and implement their own functionality.
+ * 
+ *	@date 2-4-2017
+ *
+ *	@author Curtis Maunder
+ */
 package com.palmstudios.system;
 
 import java.awt.Graphics;
