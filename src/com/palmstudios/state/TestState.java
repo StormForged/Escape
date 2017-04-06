@@ -48,7 +48,7 @@ public class TestState extends GameState
 	{
 		//g2d.setColor(Color.GREEN);
 		//g2d.fillRect(0, 0, GamePanel.WIDTH * GamePanel.SCALE, GamePanel.HEIGHT * GamePanel.SCALE);
-		Tile.drawMap(g2d, map); // This is a change as recommended in PR! :^)
+		//Tile.drawMap(g2d, map); // This is a change as recommended in PR! :^)
 	}
 
 	@Override
