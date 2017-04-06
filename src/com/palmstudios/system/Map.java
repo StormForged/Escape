@@ -1,67 +1,132 @@
+/**
+ * 	@file
+ * 
+ * 	Map class. This is instantiated when we load a new map in the main Game state.
+ * 
+ *	@date 3-4-2017
+ *
+ *	@author Jesse Buhagiar
+ */
 package com.palmstudios.system;
 
+import java.awt.Graphics2D;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Map
 {
-	public int[][] map;
-	public int length;
+	/**
+	 * How many tiles we can fit into the width and height of the map
+	 */
+	public static final int MAP_WIDTH 	= GamePanel.WIDTH / Tile.TILE_SIZE;
+	public static final int MAP_HEIGHT 	= GamePanel.HEIGHT / Tile.TILE_SIZE;
 	
-	public Map(int width, int height){
-		map = new int[height][width];
+	private String mapName;		/**< Name of the map we have loaded */
+	private Tile[][] map; 		/**< Tile map */
+	
+	/**
+	 * Default constructor
+	 */
+	public Map()
+	{
+		map = new Tile[MAP_WIDTH][MAP_HEIGHT];
+		load("map.txt"); // Default to loading map.txt
 	}
 	
-	public static Map fromFile(String fileName){
-		
-		Map map = null;
-		
-		ArrayList<ArrayList<Integer>> tempLayout = new ArrayList<>();
-		
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			String currentLine;
+	/**
+	 * Class Constructor
+	 * @param mapName - Level name (i.e "Crypt of Despair")
+	 */
+	public Map(String mapName, String path)
+	{
+		this.mapName = mapName;
+		map = new Tile[MAP_WIDTH][MAP_HEIGHT];
+		load(path);
+	}
+	
+	/**
+	 * Load a map from disk and convert the integer values into tiles.
+	 * 
+	 * @param path - File path of the map to load.
+	 * @return Returns true if map was successfully loaded from disk, false otherwise.
+	 */
+	public boolean load(String path)
+	{
+		try
+		{
+			BufferedReader 	br = new BufferedReader(new FileReader(mapName));
+			String 			currentLine;
+			String[] 		row;
 			
-			while((currentLine = br.readLine()) != null){
-				//Ignoring whitespace
+			Tile t = null; // Local tile. Initialised properly when we walk the map
+			int x = 0; // x pos counter
+			int y = 0; // y pos counter
+			
+			while((currentLine = br.readLine()) != null) // Read each l
+			{
 				if(currentLine.isEmpty())
 					continue;
+
+				row = currentLine.trim().split(" "); // Each value is split with a space (' ')
 				
-				ArrayList<Integer> row = new ArrayList<>();
-				
-				//Each tile is split with a space
-				String[] values = currentLine.trim().split(" ");
-				
-				
-				//If the string isnt empty the value is converted to int and put into our row array
-				for(String string : values){
-					if(!string.isEmpty()){
-						int id = Integer.parseInt(string);
-						
-						row.add(id);
+				for(String value : row)
+				{
+					int id = Integer.parseInt(value); // Get tile type
+					
+					// Create a new tile depending on what type we hit and initialise it as such.
+					switch(id)
+					{
+					case Tile.TILE_AIR:
+						//t = new AirTile();
+						break;
+					default:
+						System.err.println("INVALID TILE NUMBER!!!");
+						break;
 					}
+					
+					map[x][y] = t; // Store this tile in the map
+					
+					x++;
 				}
 				
-				//All data taken from the loop is added as a new entry into the temp array
-				tempLayout.add(row);
+				y++;
 			}
-		}catch(IOException e){
-			
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 		
-		//width of the map is calculated by how many entries there are in the first line of the temp array
-		int width = tempLayout.get(0).size();
-		//height is by how many lines are in the temp array
-		int height = tempLayout.size();
-		
-		map = new Map(width, height);
-		
-		for(int y = 0; y < height; y++){
-			for(int x = 0; x < width; x++){
-				map.map[y][x] = tempLayout.get(y).get(x);
-			}
-		}
-		return map;
+		return false;
 	}
+	
+	
+	/**
+	 * Draw this map.
+	 * @param g2d - Graphics object from Framebuffer
+	 */
+	void draw(Graphics2D g2d)
+	{
+		for(int x = 0; x < MAP_WIDTH; x++)
+		{
+			for(int y = 0; y < MAP_HEIGHT; y++)
+			{
+				map[x][y].draw(); // TODO: FIX UP THE FUCKING TILE CLASS TO DRAW PROPERLY!!!
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param tileX - The x position of the tile (in tile co-ords)
+	 * @param tileY - The y position of the tile (int tile co-ords)
+	 * @return Map index at tileX and tileY
+	 */
+	public Tile getTileAt(int tileX, int tileY)
+	{
+		return map[tileX][tileY];
+	}
+	
 }
