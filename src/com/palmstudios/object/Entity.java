@@ -24,7 +24,7 @@ public abstract class Entity
 	 * 
 	 * @param name - The name of this entity.
 	 */
-	protected Entity(String name)
+	public Entity(String name)
 	{
 		this.name	= name;
 		this.x 		= 0;
@@ -38,7 +38,7 @@ public abstract class Entity
 	 * @param x - Initial tile (x) of this entity
 	 * @param y - Initial tile (y) of this entity
 	 */
-	protected Entity(String name, int x, int y)
+	public Entity(String name, int x, int y)
 	{
 		this.name	= name;
 		this.x 	= x;
@@ -49,26 +49,26 @@ public abstract class Entity
 	 * 	All entity logic should be contained in this function in the specific entity's class.
 	 * 	This includes all movement logic.
 	 */
-	protected abstract void update();
+	public abstract void update();
 	
 	/**
 	 * Draw this entity to the screen.
 	 */
-	protected abstract void draw();
+	public abstract void draw();
 	
 	/**
 	 * Entity movement method.
 	 * @param vx - How many pixels we want to move per tick in the x axis.
 	 * @param vy - How many pixels we want to move per tick in the y axis.
 	 */
-	protected abstract void move(double vx, double vy);
+	public abstract void move(double vx, double vy);
 	
 	/**
 	 * Get the name of this Entity.
 	 * 
 	 * @return name - The name of this entity.
 	 */
-	protected String getEntityName()
+	public String getEntityName()
 	{
 		return name;
 	}
@@ -78,7 +78,7 @@ public abstract class Entity
 	 * 
 	 * @return x - X co-ordinate
 	 */
-	protected int getX()
+	public int getX()
 	{
 		return x;
 	}
@@ -89,7 +89,7 @@ public abstract class Entity
 	 * 
 	 * @return y - Y co-ordinate
 	 */
-	protected int getY()
+	public int getY()
 	{
 		return y;
 	}
