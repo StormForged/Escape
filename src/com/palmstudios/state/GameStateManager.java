@@ -22,6 +22,7 @@ public class GameStateManager
 	
 	public static final int SPLASH_STATE 	= 0;
 	public static final int MENU_STATE 		= 1;
+	public static final int TEST_STATE 		= 2;
 	
 	private ArrayList<GameState> 	statesList;
 	private GameState				currentState;

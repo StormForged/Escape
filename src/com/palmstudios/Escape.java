@@ -26,7 +26,7 @@ public class Escape {
 	public static void main(String[] args)
 	{
 		JFrame hwnd = new JFrame("Escape!");
-		hwnd.setSize(1024, 1024);
+		hwnd.setSize(800, 600);
 		hwnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		hwnd.add(new GamePanel());
 		hwnd.setVisible(true);
