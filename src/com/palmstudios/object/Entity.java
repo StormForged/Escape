@@ -15,9 +15,9 @@ package com.palmstudios.object;
  */
 public abstract class Entity
 {
-	private String 	name; 		/**< The name of this entity */
-	private int 	x; 			/**< What x value is this entity currently at? */ 
-	private int 	y; 			/**< What y value is this entity currently at? */ 
+	protected String 	name; 		/**< The name of this entity */
+	protected int 		x; 			/**< What x value is this entity currently at? */ 
+	protected int 		y; 			/**< What y value is this entity currently at? */ 
 	
 	/**
 	 * Basic constructor.
@@ -62,4 +62,35 @@ public abstract class Entity
 	 * @param vy - How many pixels we want to move per tick in the y axis.
 	 */
 	protected abstract void move(double vx, double vy);
+	
+	/**
+	 * Get the name of this Entity.
+	 * 
+	 * @return name - The name of this entity.
+	 */
+	protected String getEntityName()
+	{
+		return name;
+	}
+	
+	/**
+	 * Get the x co-ordinate of this Entity.
+	 * 
+	 * @return x - X co-ordinate
+	 */
+	protected int getX()
+	{
+		return x;
+	}
+	
+	
+	/**
+	 * Get the y co-ordinate of this Entity.
+	 * 
+	 * @return y - Y co-ordinate
+	 */
+	protected int getY()
+	{
+		return y;
+	}
 }
