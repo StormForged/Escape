@@ -25,9 +25,9 @@ import com.palmstudios.state.SplashState;
 public class GamePanel extends JPanel implements Runnable, KeyListener
 {
 	
-	public static final int WIDTH = 512;
-	public static final int HEIGHT = 512;
-	public static final int SCALE = 2;
+	public static final int WIDTH 	= 800;
+	public static final int HEIGHT 	= 600;
+	public static final int SCALE 	= 2;
 
 	private boolean 		running = false;	/**< True if we should be running, false if not. */
 	private Thread 			gThread = null; 	/**< Game Thread. */
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	private Graphics2D 		g2d;				/**< Graphics of the framebuffer */
 	private BufferedImage	framebuffer;		/**< The Framebuffer we can write to */
 	
-	private GameStateManager gsm = new GameStateManager();
+	private GameStateManager gsm;
 
 	/**
 	 * Class constructor
@@ -101,8 +101,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	 */
 	private void init()
 	{
+		gsm 		= new GameStateManager();
 		framebuffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB); // Create our 24-bit framebuffer
-		g2d = (Graphics2D)framebuffer.getGraphics();
+		g2d 		= (Graphics2D)framebuffer.getGraphics();
 		
 		gsm.loadState(new SplashState(gsm));
 		gsm.loadState(new MenuState(gsm));
