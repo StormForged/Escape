@@ -75,4 +75,12 @@ public class GameStateManager
 		
 		return null;
 	}
+	
+	/**
+	 * Get the number of states in the state list
+	 */
+	public int getNumberStates()
+	{
+		return statesList.size();
+	}
 }
