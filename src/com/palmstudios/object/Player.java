@@ -15,27 +15,27 @@ package com.palmstudios.object;
  */
 public class Player extends Entity
 {
-	protected Player(String name)
+	public Player(String name)
 	{
 		super(name);
 	}
 
 	@Override
-	protected void update()
+	public void update()
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void draw()
+	public void draw()
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void move(double vx, double vy)
+	public void move(double vx, double vy)
 	{
 		x += vx;
 		y += vy;
