@@ -1,0 +1,162 @@
+\hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity}{}\section{com.\+palmstudios.\+object.\+Entity Class Reference}
+\label{classcom_1_1palmstudios_1_1object_1_1_entity}\index{com.\+palmstudios.\+object.\+Entity@{com.\+palmstudios.\+object.\+Entity}}
+Inheritance diagram for com.\+palmstudios.\+object.\+Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1palmstudios_1_1object_1_1_entity}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_add92a93befa9a5d13d4ce83af5fb2404}{Entity} (String \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ad1dd4b4b3fd94cdd50041ed527a15f06}{name})
+\item 
+\hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ac20961b308971ff4da8054665126b9fd}{Entity} (String \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ad1dd4b4b3fd94cdd50041ed527a15f06}{name}, int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a6afb5022e6335acc944d420251f111fc}{x}, int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a6bcadd557e5642f4ce95f220f3f7c4c7}{y})
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ac36154420e14204de3c508af9e111bee}{update} ()
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a9f8c2f98ef0f4139c263f074c13afa5e}{draw} ()
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a793d82474f4df98487e4cfee77b89578}{move} (double vx, double vy)
+\item 
+String \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a2644e0ac79646c6ec8b9eb37c919354d}{get\+Entity\+Name} ()
+\item 
+int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a8b7617e59d28fda1735a57440b92f5fb}{getX} ()
+\item 
+int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ad4cf3590152be1d829c58b8c55ee88ad}{getY} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_ad1dd4b4b3fd94cdd50041ed527a15f06}{name}
+\item 
+int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a6afb5022e6335acc944d420251f111fc}{x}
+\item 
+int \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity_a6bcadd557e5642f4ce95f220f3f7c4c7}{y}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Jesse 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_add92a93befa9a5d13d4ce83af5fb2404}\label{classcom_1_1palmstudios_1_1object_1_1_entity_add92a93befa9a5d13d4ce83af5fb2404}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily com.\+palmstudios.\+object.\+Entity.\+Entity (\begin{DoxyParamCaption}\item[{String}]{name }\end{DoxyParamCaption})}
+
+Basic constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ The name of this entity. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_ac20961b308971ff4da8054665126b9fd}\label{classcom_1_1palmstudios_1_1object_1_1_entity_ac20961b308971ff4da8054665126b9fd}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily com.\+palmstudios.\+object.\+Entity.\+Entity (\begin{DoxyParamCaption}\item[{String}]{name,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Full constructor. Specifies entity location.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ Name of this entity \\
+\hline
+{\em x} & -\/ Initial tile (x) of this entity \\
+\hline
+{\em y} & -\/ Initial tile (y) of this entity \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a9f8c2f98ef0f4139c263f074c13afa5e}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a9f8c2f98ef0f4139c263f074c13afa5e}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!draw@{draw}}
+\index{draw@{draw}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+object.\+Entity.\+draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Draw this entity to the screen. \mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a2644e0ac79646c6ec8b9eb37c919354d}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a2644e0ac79646c6ec8b9eb37c919354d}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!get\+Entity\+Name@{get\+Entity\+Name}}
+\index{get\+Entity\+Name@{get\+Entity\+Name}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{get\+Entity\+Name()}{getEntityName()}}
+{\footnotesize\ttfamily String com.\+palmstudios.\+object.\+Entity.\+get\+Entity\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the name of this \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity}{Entity}.
+
+\begin{DoxyReturn}{Returns}
+name -\/ The name of this entity. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a8b7617e59d28fda1735a57440b92f5fb}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a8b7617e59d28fda1735a57440b92f5fb}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!getX@{getX}}
+\index{getX@{getX}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{get\+X()}{getX()}}
+{\footnotesize\ttfamily int com.\+palmstudios.\+object.\+Entity.\+getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the x co-\/ordinate of this \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity}{Entity}.
+
+\begin{DoxyReturn}{Returns}
+x -\/ X co-\/ordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_ad4cf3590152be1d829c58b8c55ee88ad}\label{classcom_1_1palmstudios_1_1object_1_1_entity_ad4cf3590152be1d829c58b8c55ee88ad}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!getY@{getY}}
+\index{getY@{getY}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{get\+Y()}{getY()}}
+{\footnotesize\ttfamily int com.\+palmstudios.\+object.\+Entity.\+getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the y co-\/ordinate of this \hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity}{Entity}.
+
+\begin{DoxyReturn}{Returns}
+y -\/ Y co-\/ordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a793d82474f4df98487e4cfee77b89578}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a793d82474f4df98487e4cfee77b89578}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!move@{move}}
+\index{move@{move}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+object.\+Entity.\+move (\begin{DoxyParamCaption}\item[{double}]{vx,  }\item[{double}]{vy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+\hyperlink{classcom_1_1palmstudios_1_1object_1_1_entity}{Entity} movement method. 
+\begin{DoxyParams}{Parameters}
+{\em vx} & -\/ How many pixels we want to move per tick in the x axis. \\
+\hline
+{\em vy} & -\/ How many pixels we want to move per tick in the y axis. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_ac36154420e14204de3c508af9e111bee}\label{classcom_1_1palmstudios_1_1object_1_1_entity_ac36154420e14204de3c508af9e111bee}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!update@{update}}
+\index{update@{update}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+object.\+Entity.\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+All entity logic should be contained in this function in the specific entity\textquotesingle{}s class. This includes all movement logic. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_ad1dd4b4b3fd94cdd50041ed527a15f06}\label{classcom_1_1palmstudios_1_1object_1_1_entity_ad1dd4b4b3fd94cdd50041ed527a15f06}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!name@{name}}
+\index{name@{name}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily String com.\+palmstudios.\+object.\+Entity.\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of this entity \mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a6afb5022e6335acc944d420251f111fc}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a6afb5022e6335acc944d420251f111fc}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!x@{x}}
+\index{x@{x}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily int com.\+palmstudios.\+object.\+Entity.\+x\hspace{0.3cm}{\ttfamily [protected]}}
+
+What x value is this entity currently at? \mbox{\Hypertarget{classcom_1_1palmstudios_1_1object_1_1_entity_a6bcadd557e5642f4ce95f220f3f7c4c7}\label{classcom_1_1palmstudios_1_1object_1_1_entity_a6bcadd557e5642f4ce95f220f3f7c4c7}} 
+\index{com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}!y@{y}}
+\index{y@{y}!com\+::palmstudios\+::object\+::\+Entity@{com\+::palmstudios\+::object\+::\+Entity}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily int com.\+palmstudios.\+object.\+Entity.\+y\hspace{0.3cm}{\ttfamily [protected]}}
+
+What y value is this entity currently at? 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/com/palmstudios/object/\hyperlink{_entity_8java}{Entity.\+java}\end{DoxyCompactItemize}

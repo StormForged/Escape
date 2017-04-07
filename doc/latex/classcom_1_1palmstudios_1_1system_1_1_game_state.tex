@@ -1,0 +1,94 @@
+\hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state}{}\section{com.\+palmstudios.\+system.\+Game\+State Class Reference}
+\label{classcom_1_1palmstudios_1_1system_1_1_game_state}\index{com.\+palmstudios.\+system.\+Game\+State@{com.\+palmstudios.\+system.\+Game\+State}}
+Inheritance diagram for com.\+palmstudios.\+system.\+Game\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.712538cm]{classcom_1_1palmstudios_1_1system_1_1_game_state}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_aefc8099403a9b7a8c133e4311becc24b}{init} ()
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_ab0c16142641d8bc358bbdc739018919f}{update} ()
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_ae1b37576ee7080b342860a9756969e29}{draw} (Graphics2D g2d)
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_ad4df5919475841d760301dfd329aab1a}{key\+Pressed} (int k)
+\item 
+abstract void \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_aef789ef42241822e413aa4ea5c76aa45}{key\+Released} (int k)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1palmstudios_1_1state_1_1_game_state_manager}{Game\+State\+Manager} \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_state_a3a9b05fb9a962eabae260371069a79eb}{gsm}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+LL G\+A\+ME S\+T\+A\+T\+ES I\+N\+H\+E\+R\+IT F\+R\+OM T\+H\+IS C\+L\+A\+S\+S!!! IT C\+AN A\+ND S\+H\+O\+U\+LD N\+E\+V\+ER BE I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+D!!! \begin{DoxyAuthor}{Author}
+Jesse 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_ae1b37576ee7080b342860a9756969e29}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_ae1b37576ee7080b342860a9756969e29}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!draw@{draw}}
+\index{draw@{draw}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+system.\+Game\+State.\+draw (\begin{DoxyParamCaption}\item[{Graphics2D}]{g2d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Draw objects to the framebuffer (Buffered\+Image in \hyperlink{_game_panel_8java}{Game\+Panel.\+java}) 
+\begin{DoxyParams}{Parameters}
+{\em g2d} & -\/ Graphics2D passed from \hyperlink{_game_panel_8java}{Game\+Panel.\+java} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_aefc8099403a9b7a8c133e4311becc24b}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_aefc8099403a9b7a8c133e4311becc24b}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!init@{init}}
+\index{init@{init}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+system.\+Game\+State.\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+State initialisation method. All local state data should be initialised in this function. \mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_ad4df5919475841d760301dfd329aab1a}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_ad4df5919475841d760301dfd329aab1a}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!key\+Pressed@{key\+Pressed}}
+\index{key\+Pressed@{key\+Pressed}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{key\+Pressed()}{keyPressed()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+system.\+Game\+State.\+key\+Pressed (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Function called when a user presses a key on the keyboard. 
+\begin{DoxyParams}{Parameters}
+{\em k} & -\/ Key that was pressed by the user. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_aef789ef42241822e413aa4ea5c76aa45}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_aef789ef42241822e413aa4ea5c76aa45}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!key\+Released@{key\+Released}}
+\index{key\+Released@{key\+Released}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{key\+Released()}{keyReleased()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+system.\+Game\+State.\+key\+Released (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Function called when user releases a key on the keyboard. 
+\begin{DoxyParams}{Parameters}
+{\em k} & -\/ Key that was resleased. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_ab0c16142641d8bc358bbdc739018919f}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_ab0c16142641d8bc358bbdc739018919f}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!update@{update}}
+\index{update@{update}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily abstract void com.\+palmstudios.\+system.\+Game\+State.\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+State update method. All game logic is controlled here. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcom_1_1palmstudios_1_1system_1_1_game_state_a3a9b05fb9a962eabae260371069a79eb}\label{classcom_1_1palmstudios_1_1system_1_1_game_state_a3a9b05fb9a962eabae260371069a79eb}} 
+\index{com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}!gsm@{gsm}}
+\index{gsm@{gsm}!com\+::palmstudios\+::system\+::\+Game\+State@{com\+::palmstudios\+::system\+::\+Game\+State}}
+\subsubsection{\texorpdfstring{gsm}{gsm}}
+{\footnotesize\ttfamily \hyperlink{classcom_1_1palmstudios_1_1state_1_1_game_state_manager}{Game\+State\+Manager} com.\+palmstudios.\+system.\+Game\+State.\+gsm\hspace{0.3cm}{\ttfamily [protected]}}
+
+Game\+State\+Manager passed from \hyperlink{classcom_1_1palmstudios_1_1system_1_1_game_panel}{Game\+Panel} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/com/palmstudios/system/\hyperlink{_game_state_8java}{Game\+State.\+java}\end{DoxyCompactItemize}
