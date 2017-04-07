@@ -34,7 +34,7 @@ public class TestState extends GameState
 	public void init()
 	{
 		// TODO Auto-generated method stub
-		map = Map.fromFile("map.txt");
+		//map = Map.fromFile("map.txt");
 	}
 
 	@Override

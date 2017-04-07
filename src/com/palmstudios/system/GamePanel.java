@@ -109,6 +109,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 		gsm.loadState(new MenuState(gsm));
 		gsm.changeState(GameStateManager.SPLASH_STATE);
 		
+		Art.init(); // Load all tilesheets
+		
 		running = true;
 	}
 	
