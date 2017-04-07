@@ -11,9 +11,11 @@ package com.palmstudios.system;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.palmstudios.tile.AirTile;
+import com.palmstudios.tile.NullTile;
 
 public class Map
 {
@@ -52,11 +54,11 @@ public class Map
 	 * @param path - File path of the map to load.
 	 * @return Returns true if map was successfully loaded from disk, false otherwise.
 	 */
-	public boolean load(String path)
+	private boolean load(String path)
 	{
 		try
 		{
-			BufferedReader 	br = new BufferedReader(new FileReader(mapName));
+			BufferedReader 	br = new BufferedReader(new FileReader(path));
 			String 			currentLine;
 			String[] 		row;
 			
@@ -71,28 +73,31 @@ public class Map
 
 				row = currentLine.trim().split(" "); // Each value is split with a space (' ')
 				
+				x = 0; // Reset x location so we don't overrun the array!
+				
 				for(String value : row)
 				{
 					int id = Integer.parseInt(value); // Get tile type
 					
-					// Create a new tile depending on what type we hit and initialise it as such.
-					switch(id)
+					switch(id) // Create a new tile depending on what type we hit and initialise it as such.
 					{
 					case Tile.TILE_AIR:
-						//t = new AirTile();
+						t = new AirTile();
 						break;
 					default:
+						t = new NullTile();
 						System.err.println("INVALID TILE NUMBER!!!");
 						break;
 					}
 					
 					map[x][y] = t; // Store this tile in the map
-					
 					x++;
 				}
 				
 				y++;
 			}
+			
+			br.close();
 		} 
 		catch (IOException e)
 		{
@@ -107,13 +112,13 @@ public class Map
 	 * Draw this map.
 	 * @param g2d - Graphics object from Framebuffer
 	 */
-	void draw(Graphics2D g2d)
+	public void draw(Graphics2D g2d)
 	{
-		for(int x = 0; x < MAP_WIDTH; x++)
+		for(int y = 0; y < MAP_HEIGHT; y++)
 		{
-			for(int y = 0; y < MAP_HEIGHT; y++)
+			for(int x = 0; x < MAP_WIDTH; x++)
 			{
-				map[x][y].draw(); // TODO: FIX UP THE FUCKING TILE CLASS TO DRAW PROPERLY!!!
+				map[x][y].draw(g2d, x, y);
 			}
 		}
 	}

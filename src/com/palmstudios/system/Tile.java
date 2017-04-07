@@ -70,5 +70,5 @@ public abstract class Tile
 	/**
 	 * Draw this tile.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics2D g2d, int x, int y);
 }
