@@ -33,7 +33,7 @@ public class Escape {
 		hwnd.setSize(GamePanel.WIDTH, GamePanel.HEIGHT);
 		hwnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		hwnd.add(gpan);
-		hwnd.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
+		hwnd.setPreferredSize(new Dimension(GamePanel.WIDTH * GamePanel.SCALE, GamePanel.HEIGHT * GamePanel.SCALE));
 		hwnd.setResizable(false);
 		hwnd.setVisible(true);
 		hwnd.pack();
