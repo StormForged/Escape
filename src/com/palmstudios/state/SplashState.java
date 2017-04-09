@@ -12,6 +12,11 @@ package com.palmstudios.state;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import com.palmstudios.system.GamePanel;
 import com.palmstudios.system.GameState;
@@ -22,6 +27,10 @@ import com.palmstudios.system.GameState;
  */
 public class SplashState extends GameState
 {
+	private static final int DELAY_TIME = 5000;
+	
+	private BufferedImage 	logo;
+	private int				count;
 	
 	public SplashState(GameStateManager gsm)
 	{
@@ -32,29 +41,40 @@ public class SplashState extends GameState
 	@Override
 	public void init()
 	{
-		// TODO Auto-generated method stub
+		count = DELAY_TIME;
+		
+		try
+		{
+			logo = ImageIO.read(new File("plogo.png"));
+		} 
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void update()
 	{
-		// TODO Auto-generated method stub
+		count--;
 		
+		if(count <= 0)
+			gsm.changeState(GameStateManager.MENU_STATE);
 	}
 
 	@Override
 	public void draw(Graphics2D g2d)
 	{
-		g2d.setColor(Color.CYAN);
-		g2d.fillRect(0, 0, GamePanel.WIDTH * GamePanel.SCALE, GamePanel.HEIGHT * GamePanel.SCALE);
-		
+		g2d.drawImage(logo, 0, 0, logo.getWidth(), logo.getHeight(), null);
 	}
 
 	@Override
 	public void keyPressed(int k)
 	{
-		if(k == KeyEvent.VK_SPACE)
+		// Check if any key on the keyboard has been pressed.
+		if(k > 0)
 			gsm.changeState(GameStateManager.MENU_STATE);
 	}
 
