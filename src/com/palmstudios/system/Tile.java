@@ -9,16 +9,7 @@
  */
 package com.palmstudios.system;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 public abstract class Tile
 {
@@ -27,6 +18,8 @@ public abstract class Tile
 	
 	/** TILE TYPE CONSTANTS */
 	public static final int TILE_AIR	= 0;	/**< Air tile type */
+	public static final int TILE_WALL	= 4; 	/**< Wall tile type */
+	public static final int TILE_CORNER = 9;	/** Wall corner */
 	
 	public int 		type; 	/**< The type of this tile */
 	public String 	name; 	/**< Name of this tile. Probably not worth bothering with */

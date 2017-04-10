@@ -35,6 +35,7 @@ public class TestState extends GameState
 	{
 		// TODO Auto-generated method stub
 		//map = Map.fromFile("map.txt");
+		map = new Map("test", "map.txt");
 	}
 
 	@Override
@@ -49,6 +50,7 @@ public class TestState extends GameState
 		//g2d.setColor(Color.GREEN);
 		//g2d.fillRect(0, 0, GamePanel.WIDTH * GamePanel.SCALE, GamePanel.HEIGHT * GamePanel.SCALE);
 		//Tile.drawMap(g2d, map); // This is a change as recommended in PR! :^)
+		map.draw(g2d);
 	}
 
 	@Override
