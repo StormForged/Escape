@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import com.palmstudios.tile.AirTile;
 import com.palmstudios.tile.NullTile;
+import com.palmstudios.tile.WallTile;
 
 public class Map
 {
@@ -83,6 +84,12 @@ public class Map
 					{
 					case Tile.TILE_AIR:
 						t = new AirTile();
+						break;
+					case Tile.TILE_WALL:
+						t = new WallTile(WallTile.WALL);
+						break;
+					case Tile.TILE_CORNER:
+						t = new WallTile(WallTile.CORNER);
 						break;
 					default:
 						t = new NullTile();

@@ -61,7 +61,10 @@ public class SplashState extends GameState
 		count--;
 		
 		if(count <= 0)
-			gsm.changeState(GameStateManager.MENU_STATE);
+		{
+			gsm.loadState(new TestState(gsm));
+			gsm.changeState(GameStateManager.TEST_STATE);
+		}
 	}
 
 	@Override
@@ -75,7 +78,10 @@ public class SplashState extends GameState
 	{
 		// Check if any key on the keyboard has been pressed.
 		if(k > 0)
-			gsm.changeState(GameStateManager.MENU_STATE);
+		{
+			gsm.loadState(new TestState(gsm));
+			gsm.changeState(GameStateManager.TEST_STATE);
+		}
 	}
 
 	@Override
