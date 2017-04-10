@@ -71,4 +71,12 @@ public abstract class Tile
 	 * Draw this tile.
 	 */
 	public abstract void draw(Graphics2D g2d, int x, int y);
+	
+	/**
+	 * Get the type of this tile 
+	 */
+	public int getType()
+	{
+		return this.type;
+	}
 }
