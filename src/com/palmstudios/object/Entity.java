@@ -9,6 +9,8 @@
  */
 package com.palmstudios.object;
 
+import java.awt.Graphics2D;
+
 /**
  * @author Jesse
  *
@@ -54,7 +56,7 @@ public abstract class Entity
 	/**
 	 * Draw this entity to the screen.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics2D g2d);
 	
 	/**
 	 * Entity movement method.
