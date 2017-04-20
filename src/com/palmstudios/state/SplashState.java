@@ -27,7 +27,7 @@ import com.palmstudios.system.GameState;
  */
 public class SplashState extends GameState
 {
-	private static final int DELAY_TIME = 5000;
+	private static final int DELAY_TIME = 180;
 	
 	private BufferedImage 	logo;
 	private int				count;
@@ -80,7 +80,7 @@ public class SplashState extends GameState
 		if(k > 0)
 		{
 			gsm.loadState(new TestState(gsm));
-			gsm.changeState(GameStateManager.TEST_STATE);
+			gsm.changeState(GameStateManager.MENU_STATE);
 		}
 	}
 
