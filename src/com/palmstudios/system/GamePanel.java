@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	public static final int WIDTH 	= 640;
 	public static final int HEIGHT 	= 480;
 	public static final int SCALE 	= 1;
+	public static final int FPS		= 60;
 
 	private boolean 		running = false;	/**< True if we should be running, false if not. */
 	private Thread 			gThread = null; 	/**< Game Thread. */
@@ -68,30 +69,37 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	 */
 	public synchronized void run()
 	{
-		long currTime;
+		long startTime;
 		long dt;
+		long wait;
+		
+		long target = 1000 / FPS; // 60 Frames in 1 second
 		
 		init();
 		while(running)
 		{
-			currTime = System.nanoTime();
+			startTime = System.nanoTime();
 			
 			update();
 			render();
 			draw();
 			
-			dt = System.nanoTime() - currTime;
+			dt = System.nanoTime() - startTime;
+			
+			wait = target - dt / 1000000;
+			
+			if(wait < 0)
+				wait = 5;
 			
 			try
 			{
-				Thread.sleep((1000 / 60) / dt / 1000000); // Try to maintain 60FPS
+				Thread.sleep(wait); // Try to maintain 60FPS
 			} 
 			catch (InterruptedException e)
 			{
 				System.err.println("Fatal: Game Thread Exception!");
 				e.printStackTrace();
 			}
-			
 		}
 	}
 	
