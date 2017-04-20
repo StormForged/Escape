@@ -28,7 +28,7 @@ public class MenuState extends GameState
 {
 	
 	private BufferedImage 	logo;
-	private int tick = 0;
+	private int tick = 180;
 	private int selected = 0;
 	
 	private String[] options = {"New Game", "Quit"};
@@ -83,7 +83,10 @@ public class MenuState extends GameState
 		if(k == KeyEvent.VK_ENTER)
 		{
 			if(selected == 0)
+			{
+				gsm.loadState(new TestState(gsm));
 				gsm.changeState(GameStateManager.TEST_STATE);
+			}
 			if(selected == 1)
 				System.exit(0);
 		}
