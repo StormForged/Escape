@@ -56,7 +56,7 @@ public class TestState extends GameState
 	{
 		if(ouchies > 10)
 			player.sprite = player.loadSprite("enemy.png");
-		if(timer == 120){
+		if(timer == 40){
 			enemies[0].update();
 			enemies[1].update();
 			enemies[2].update();
@@ -94,6 +94,12 @@ public class TestState extends GameState
 				&& map.getTileAt(((player.getX() + 32) / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE)).getType() != Tile.TILE_WALL)
 			player.move(1, 0);
 		
+		if(k == KeyEvent.VK_ESCAPE)
+		{
+			gsm.changeState(GameStateManager.MENU_STATE);
+			gsm.unloadState(GameStateManager.TEST_STATE);
+		}
+		
 	}
 
 	@Override
@@ -108,11 +114,12 @@ public class TestState extends GameState
 		if(collisionTick == 0){
 			for(int i = 0; i < enemies.length; i++){
 				if(player.getX() == enemies[i].getX() && player.getY() == enemies[i].getY())
+				{
 					ouchies++;
 					collisionTick = 120;
+				}
 			}
 		}else if(collisionTick > 0)
 			collisionTick--;
 	}
-
 }
