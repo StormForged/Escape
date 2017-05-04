@@ -15,25 +15,29 @@ public class VictoryState extends GameState
 	private int score;
 	private String scoreFile = "score.txt";
 	private BufferedImage logo;
-	
-	public void load(String path){
-		try{
+
+	public void load(String path)
+	{
+		try
+		{
 			Scanner scanner = new Scanner(new File(path));
-			
+
 			score = scanner.nextInt();
-			
+
 			scanner.close();
-		}catch(IOException e){
-		
-		};
+		} catch (IOException e)
+		{
+
+		}
+		;
 	}
-		
+
 	public VictoryState(GameStateManager gsm)
 	{
 		this.gsm = gsm;
 		init();
 	}
-	
+
 	@Override
 	public void init()
 	{
@@ -42,8 +46,7 @@ public class VictoryState extends GameState
 		try
 		{
 			logo = ImageIO.read(new File("victory.png"));
-		} 
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +57,7 @@ public class VictoryState extends GameState
 	public void update()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -69,14 +72,14 @@ public class VictoryState extends GameState
 	public void keyPressed(int k)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(int k)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
