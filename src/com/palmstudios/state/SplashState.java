@@ -62,7 +62,6 @@ public class SplashState extends GameState
 		
 		if(count <= 0)
 		{
-			gsm.loadState(new TestState(gsm));
 			gsm.changeState(GameStateManager.MENU_STATE);
 		}
 	}

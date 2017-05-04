@@ -60,8 +60,6 @@ public class Player extends Entity{
 	public void move(double vx, double vy){
 		x += vx * Tile.TILE_SIZE;
 		y += vy * Tile.TILE_SIZE;
-		System.out.println("x:" + x);
-		System.out.println("y:" + y);
 	}
 	
 	@Override
