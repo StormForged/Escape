@@ -33,11 +33,6 @@ public class Escape {
 		hwnd.setSize(GamePanel.WIDTH, GamePanel.HEIGHT);
 		hwnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		hwnd.add(gpan);
-		// GET RID OF THIS AFTER DEMO!!!
-		//////////////////////////////////
-		hwnd.setUndecorated(true);
-		hwnd.setLocationRelativeTo(null);
-		/////////////////////////////////
 		hwnd.setResizable(false);
 		hwnd.setVisible(true);
 		hwnd.pack();
