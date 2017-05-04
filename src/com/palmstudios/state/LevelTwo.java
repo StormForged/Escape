@@ -32,7 +32,7 @@ import com.palmstudios.tile.AirTile;
  * @author Jesse
  *
  */
-public class TestState extends GameState
+public class LevelTwo extends GameState
 {
 	public static Map map = new Map(); 
 	private Player player = new Player("player");
@@ -41,8 +41,8 @@ public class TestState extends GameState
 	private int health = 5;
 	private int keys = 0;
 	private int collisionTick = 0;
-	private int score = 0;
-	private int currentScore = 0;
+	private int score;
+	private int currentScore;
 	private int traps = 2;
 	private String scoreFile = "score.txt";
 	
@@ -79,7 +79,7 @@ public class TestState extends GameState
 	};
 	
 
-	public TestState(GameStateManager gsm)
+	public LevelTwo(GameStateManager gsm)
 	{
 		this.gsm = gsm;
 		init();
@@ -88,8 +88,9 @@ public class TestState extends GameState
 	@Override
 	public void init()
 	{
-		map = new Map("test", "map.txt");
+		map = new Map("test", "map2.txt");
 		load(scoreFile);
+		score = currentScore;
 	}
 
 	@Override
@@ -112,11 +113,10 @@ public class TestState extends GameState
 		}
 		
 		if(map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE)).getType() == Tile.TILE_STAIR && keys == 1){
-			score = score + health + (levelTimer / 60);
 			saveScore(scoreFile, score);
 			load(scoreFile);
-			gsm.loadState(new LevelTwo(gsm));
-			gsm.changeState(GameStateManager.LEVEL_TWO);
+			gsm.loadState(new VictoryState(gsm));
+			gsm.changeState(GameStateManager.VICTORY_STATE);
 			gsm.unloadState(GameStateManager.TEST_STATE);
 		}
 		
@@ -125,12 +125,18 @@ public class TestState extends GameState
 			score++;
 		}
 		
-	
-		if(levelTimer == 0)
-			loadDefeat();
-	
-		if(health == 0)
-			loadDefeat();
+		
+		if(levelTimer == 0){
+			gsm.loadState(new DefeatState(gsm));
+			gsm.changeState(GameStateManager.DEFEAT_STATE);
+			gsm.unloadState(GameStateManager.TEST_STATE);
+		}
+		
+		if(health == 0){
+			gsm.loadState(new DefeatState(gsm));
+			gsm.changeState(GameStateManager.DEFEAT_STATE);
+			gsm.unloadState(GameStateManager.TEST_STATE);
+		}
 		
 		levelTimer--;
 	}
@@ -200,12 +206,5 @@ public class TestState extends GameState
 		}else if(collisionTick > 0)
 			collisionTick--;
 	}
-	
-	public void loadDefeat(){
-		saveScore(scoreFile, score);
-		load(scoreFile);
-		gsm.loadState(new DefeatState(gsm));
-		gsm.changeState(GameStateManager.DEFEAT_STATE);
-		gsm.unloadState(GameStateManager.TEST_STATE);
-	}
 }
+
