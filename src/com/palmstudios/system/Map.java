@@ -59,7 +59,7 @@ public class Map
 	 * @param path - File path of the map to load.
 	 * @return Returns true if map was successfully loaded from disk, false otherwise.
 	 */
-	private boolean load(String path)
+	public boolean load(String path)
 	{
 		try
 		{
@@ -157,14 +157,14 @@ public class Map
 		return map[tileX][tileY];
 	}
 	
-	//Allows us to change a tile to an air tile
-	//Eg for key tiles
-	public void setToAir(int tileX, int tileY){
-		map[tileX][tileY] = new AirTile();
+	/**
+	 * 
+	 * @param tileX - The x position of the tile (in tile co-ords)
+	 * @param tileY - The y position of the tile (int tile co-ords)
+	 * @param t - Tile to add to map
+	 */
+	public void setTileAt(int tileX, int tileY, Tile t)
+	{
+		map[tileX][tileY] = t;
 	}
-	
-	public void setToSpike(int tileX, int tileY){
-		map[tileX][tileY] = new SpikeTile();
-	}
-	
 }

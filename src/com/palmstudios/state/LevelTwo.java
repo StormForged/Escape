@@ -7,18 +7,13 @@
  */
 package com.palmstudios.state;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.palmstudios.object.Enemy;
 import com.palmstudios.object.Player;
@@ -27,6 +22,7 @@ import com.palmstudios.system.GameState;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 import com.palmstudios.tile.AirTile;
+import com.palmstudios.tile.SpikeTile;
 
 /**
  * @author Jesse
@@ -108,7 +104,7 @@ public class LevelTwo extends GameState
 		collisionCheck();
 		
 		if(map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE)).getType() == Tile.TILE_KEY){
-			map.setToAir((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE), new AirTile());
 			keys = 1;
 		}
 		
@@ -121,7 +117,7 @@ public class LevelTwo extends GameState
 		}
 		
 		if(map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE)).getType() == Tile.TILE_TREASURE){
-			map.setToAir((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE), new AirTile());
 			score++;
 		}
 		
@@ -174,7 +170,7 @@ public class LevelTwo extends GameState
 		
 		if(k == KeyEvent.VK_E && traps > 0 
 				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE)).getType() == Tile.TILE_AIR){
-			map.setToSpike((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32)/ Tile.TILE_SIZE), new SpikeTile());
 			traps--;
 		}	
 		

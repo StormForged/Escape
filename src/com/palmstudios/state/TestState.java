@@ -27,6 +27,7 @@ import com.palmstudios.system.GameState;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 import com.palmstudios.tile.AirTile;
+import com.palmstudios.tile.SpikeTile;
 
 /**
  * @author Jesse
@@ -113,7 +114,7 @@ public class TestState extends GameState
 		if (map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 				.getType() == Tile.TILE_KEY)
 		{
-			map.setToAir((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new AirTile());
 			keys = 1;
 		}
 
@@ -131,7 +132,7 @@ public class TestState extends GameState
 		if (map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 				.getType() == Tile.TILE_TREASURE)
 		{
-			map.setToAir((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new AirTile());
 			score++;
 		}
 
@@ -183,7 +184,7 @@ public class TestState extends GameState
 				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 						.getType() == Tile.TILE_AIR)
 		{
-			map.setToSpike((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE));
+			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new SpikeTile());
 			traps--;
 		}
 
