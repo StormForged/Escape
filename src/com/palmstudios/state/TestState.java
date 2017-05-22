@@ -22,6 +22,7 @@ import java.util.TimerTask;
 
 import com.palmstudios.object.Enemy;
 import com.palmstudios.object.Player;
+import com.palmstudios.system.Art;
 import com.palmstudios.system.GamePanel;
 import com.palmstudios.system.GameState;
 import com.palmstudios.system.Map;
@@ -36,16 +37,13 @@ import com.palmstudios.tile.SpikeTile;
 public class TestState extends GameState
 {
 	public static Map map = new Map();
-	private Player player = new Player("player");
+	private Player player = new Player("player", 32, 64, 5, false, 2);
 	private int levelTimer = 7200; // This is determined by length of timer in
 									// minutes * 60 * 60 (eg. 7200 is 2mins)
 	private int enemyTimer = 0;
-	private int health = 5;
-	private int keys = 0;
 	private int collisionTick = 0;
 	private int score = 0;
 	private int currentScore = 0;
-	private int traps = 2;
 	private String scoreFile = "score.txt";
 
 	public void load(String path)
@@ -99,14 +97,6 @@ public class TestState extends GameState
 	@Override
 	public void update()
 	{
-		if (enemyTimer == 40)
-		{
-			enemies[0].update();
-			enemies[1].update();
-			enemies[2].update();
-			enemyTimer = 0;
-		}
-
 		enemyTimer++;
 
 		collisionCheck();
@@ -115,13 +105,13 @@ public class TestState extends GameState
 				.getType() == Tile.TILE_KEY)
 		{
 			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new AirTile());
-			keys = 1;
+			player.setKey();
 		}
 
 		if (map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
-				.getType() == Tile.TILE_STAIR && keys == 1)
+				.getType() == Tile.TILE_STAIR && player.hasKey())
 		{
-			score = score + health + (levelTimer / 60);
+			score = score + player.getHealth() + (levelTimer / 60);
 			saveScore(scoreFile, score);
 			load(scoreFile);
 			gsm.loadState(new LevelTwo(gsm));
@@ -139,7 +129,7 @@ public class TestState extends GameState
 		if (levelTimer == 0)
 			loadDefeat();
 
-		if (health == 0)
+		if (player.getHealth() == 0)
 			loadDefeat();
 
 		levelTimer--;
@@ -153,11 +143,12 @@ public class TestState extends GameState
 		enemies[1].draw(g2d);
 		enemies[2].draw(g2d);
 		player.draw(g2d);
-		g2d.drawString("Health:" + health, 0, 16);
-		g2d.drawString("Key:" + keys, 150, 16);
+		g2d.drawString("Health:" + player.getHealth(), 0, 16);
+		if(player.hasKey())
+			g2d.drawImage(Art.tiles[2][3], 150, 0, null);
 		g2d.drawString("Score: " + score, 250, 16);
 		g2d.drawString("Time: " + (levelTimer / 60), 350, 16);
-		g2d.drawString("Traps: " + traps, 460, 16);
+		g2d.drawString("Traps: " + player.getTraps(), 460, 16);
 	}
 
 	@Override
@@ -166,26 +157,25 @@ public class TestState extends GameState
 		if (k == KeyEvent.VK_W && player.getY() != 0
 				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), (player.getY() / Tile.TILE_SIZE))
 						.getType() != Tile.TILE_WALL)
-			player.move(0, -1);
+			takeTurn(0, -1);
 		if (k == KeyEvent.VK_A && player.getX() != 0
 				&& map.getTileAt(((player.getX() - 32) / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 						.getType() != Tile.TILE_WALL)
-			player.move(-1, 0);
+			takeTurn(-1, 0);
 		if (k == KeyEvent.VK_S && player.getY() != (GamePanel.HEIGHT - (Tile.TILE_SIZE + Tile.TILE_SIZE))
 				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 64) / Tile.TILE_SIZE))
 						.getType() != Tile.TILE_WALL)
-			player.move(0, 1);
+			takeTurn(0, 1);
 		if (k == KeyEvent.VK_D && player.getX() != GamePanel.WIDTH - Tile.TILE_SIZE
 				&& map.getTileAt(((player.getX() + 32) / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 						.getType() != Tile.TILE_WALL)
-			player.move(1, 0);
+			takeTurn(1, 0);
 
-		if (k == KeyEvent.VK_E && traps > 0
+		if (k == KeyEvent.VK_E && player.placeTrap()
 				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
 						.getType() == Tile.TILE_AIR)
 		{
 			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new SpikeTile());
-			traps--;
 		}
 
 		if (k == KeyEvent.VK_ESCAPE)
@@ -213,14 +203,22 @@ public class TestState extends GameState
 			{
 				if (player.getX() == enemies[i].getX() && player.getY() == enemies[i].getY())
 				{
-					health--;
+					player.hurtPlayer(1);
 					collisionTick = 120;
 				}
 			}
 		} else if (collisionTick > 0)
 			collisionTick--;
 	}
-
+	
+	//Makes the game pseudo turn based, like a rogue-like i.e Mystery Dungeon
+	public void takeTurn(int x, int y){
+		player.move(x, y);
+		enemies[0].update();
+		enemies[1].update();
+		enemies[2].update();
+	}
+	
 	public void loadDefeat()
 	{
 		saveScore(scoreFile, score);
