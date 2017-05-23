@@ -25,8 +25,10 @@ public class Player extends Entity{
 	public BufferedImage sprite;
 	
 	public boolean hit = false;
-	int x = 32;
-	int y = 64;
+
+	private int health;
+	private boolean hasKey;
+	private int traps;
 	
 	public BufferedImage loadSprite(String path)
 	{	
@@ -41,9 +43,12 @@ public class Player extends Entity{
 		return sprite;
 	}
 	
-	public Player(String name){
-		super(name);	
+	public Player(String name, int x, int y, int health, boolean hasKey, int traps){
+		super(name, x, y);	
 		sprite = loadSprite("player.png");
+		this.health = health;
+		this.hasKey = hasKey;
+		this.traps = traps;
 	}
 
 	@Override
@@ -70,5 +75,34 @@ public class Player extends Entity{
 	@Override
 	public int getY(){
 		return y;
+	}
+	
+	public int getHealth(){
+		return health;	
+	}
+	
+	public int getTraps(){
+		return health;
+	}
+	
+	public void hurtPlayer(int damage){
+		health -= damage;
+	}
+	
+	public void setKey(){
+		hasKey = true;
+	}
+	
+	public Boolean hasKey(){
+		return hasKey;
+	}
+	
+	public Boolean placeTrap(){
+		if(traps > 0){
+			traps--;
+			return true;
+		}
+		
+		return false;
 	}
 }

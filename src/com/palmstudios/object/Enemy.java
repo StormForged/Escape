@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 
 import com.palmstudios.state.TestState;
 import com.palmstudios.system.Tile;
+import com.palmstudios.tile.AirTile;
+import com.palmstudios.tile.SpikeTile;
 
 /**
  * @author Curtis
@@ -47,7 +49,10 @@ public class Enemy extends Entity{
 	private int x = 32;
 	private int y = 64;
 	private int direction = 2;
-
+	private int slow = 0;
+	private int cooldown = 0;
+	private int nextMove = 0;
+	
 	private BufferedImage loadSprite(String path)
 	{	
 		try
@@ -65,7 +70,16 @@ public class Enemy extends Entity{
 	@Override
 	public void update()
 	{
-		// TODO Auto-generated method stub
+		if(slow > 0){
+			sprite = loadSprite("enemyhurt.png");
+			if(nextMove > 0){
+				nextMove--;
+				return;
+			}else if(nextMove == 0){
+				nextMove = 2 * slow;
+			}
+		}else
+			sprite = loadSprite("enemy.png");
 		switch(direction){
 			case 1:
 				if(TestState.map.getTileAt((x / Tile.TILE_SIZE), (y / Tile.TILE_SIZE)).getType() != Tile.TILE_WALL){
@@ -94,6 +108,21 @@ public class Enemy extends Entity{
 				break;
 		}
 		
+		if(TestState.map.getTileAt((x / Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE)).getType() == Tile.TILE_SPIKE){
+			TestState.map.setTileAt((x/ Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE), new AirTile());
+			slow++;
+			nextMove = 2 * slow;
+			cooldown += 8;
+		}
+		
+		if(cooldown < 8 && slow > 1){
+			slow--;
+		}else if(cooldown == 0 && slow == 1){
+			slow--;
+		}
+			
+		if(cooldown > 0)
+			cooldown--;
 	}
 
 	@Override
@@ -101,12 +130,14 @@ public class Enemy extends Entity{
 	{
 		// TODO Auto-generated method stub
 		g2d.drawImage(sprite, x, y, null);
+		if(cooldown > 0)
+			g2d.drawString("" + cooldown, x + 1, y - 2);
 	}
 
 	@Override
 	public void move(double vx, double vy)
 	{
-		// TODO Auto-generated method stub\
+		// TODO Auto-generated method stub
 		x += vx * Tile.TILE_SIZE;
 		y += vy * Tile.TILE_SIZE;
 		
