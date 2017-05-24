@@ -91,8 +91,14 @@ public class Map
 					case Tile.TILE_WALL:
 						t = new WallTile(WallTile.WALL);
 						break;
-					case Tile.TILE_CORNER:
-						t = new WallTile(WallTile.CORNER);
+					case Tile.TILE_WALLSEG:
+						t = new WallTile(WallTile.WALL_SEG);
+						break;
+					case Tile.TILE_WALLLEFT:
+						t = new WallTile(WallTile.WALL_LEFT_SEG);
+						break;
+					case Tile.TILE_WALLRIGHT:
+						t = new WallTile(WallTile.WALL_RIGHT_SEG);
 						break;
 					case Tile.TILE_KEY:
 						t = new KeyTile();
@@ -106,9 +112,12 @@ public class Map
 					case Tile.TILE_SPIKE:
 						t = new SpikeTile();
 						break;
+					case 88:
+						t = new NullTile();
+						break;
 					default:
 						t = new NullTile();
-						System.err.println("INVALID TILE NUMBER!!!");
+						System.err.println("INVALID TILE NUMBER: " + id + "!!!");
 						break;
 					}
 					

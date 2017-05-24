@@ -9,17 +9,16 @@
  */
 package com.palmstudios.state;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import com.palmstudios.object.Enemy;
 import com.palmstudios.object.Player;
-import com.palmstudios.system.GamePanel;
+import com.palmstudios.system.Audio;
 import com.palmstudios.system.GameState;
 import com.palmstudios.system.Map;
-import com.palmstudios.system.Tile;
-import com.palmstudios.tile.SpikeTile;
 
 /**
  * @author Jesse
@@ -27,12 +26,15 @@ import com.palmstudios.tile.SpikeTile;
  */
 public class PlayState extends GameState
 {
+	private final int			GAME_TIME = 6000;// This is determined by length of timer in minutes * 60 * 60 (eg. 7200 is 2mins)
+	
 	private GameStateManager 	gsm;
 	private Map					map = new Map();
 	private Player 				player;
 	private ArrayList<Enemy> 	enemies;
 	
-	int currentLevel;
+	private int 				currentLevel;
+	private int					time;
 	
 	public PlayState(GameStateManager gsm)
 	{
@@ -50,22 +52,36 @@ public class PlayState extends GameState
 		
 		enemies.add(new Enemy("Goblin1", map, player, 32, 384));
 		//enemies.add(new Enemy("Goblin2", map, 32, 384));
+		
+		Audio.playSound("data/snd/start.wav");
+		time = GAME_TIME;
 	}
 
 	public void update()
 	{
+		if(time <= 0)
+		{
+			gsm.loadState(new VictoryState(gsm));
+			gsm.changeState(gsm.getNumberStates() - 1);
+		}
+		
 		player.update();
 		
 		for(int i = 0; i < enemies.size(); i++)
 		{
 			enemies.get(i).update();
 		}
+		
+		time--;
 	}
 
 	public void draw(Graphics2D g2d)
 	{
 		map.draw(g2d);
-
+		
+		g2d.setColor(Color.WHITE);
+		g2d.drawString("Health: " + player.getHealth() + "     Time: " + time / 60 , 0, 32);
+		
 		for(int i = 0; i < enemies.size(); i++)
 		{
 			enemies.get(i).draw(g2d);
@@ -76,28 +92,24 @@ public class PlayState extends GameState
 
 	public void keyPressed(int k)
 	{
-		if (k == KeyEvent.VK_W && player.getY() != 0
-				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), (player.getY() / Tile.TILE_SIZE))
-						.getType() != Tile.TILE_WALL)
-			player.move(0, -32);
-		if (k == KeyEvent.VK_A && player.getX() != 0
-				&& map.getTileAt(((player.getX() - 32) / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
-						.getType() != Tile.TILE_WALL)
-			player.move(-32, 0);
-		if (k == KeyEvent.VK_S && player.getY() != (GamePanel.HEIGHT - (Tile.TILE_SIZE + Tile.TILE_SIZE))
-				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 64) / Tile.TILE_SIZE))
-						.getType() != Tile.TILE_WALL)
-			player.move(0, 32);
-		if (k == KeyEvent.VK_D && player.getX() != GamePanel.WIDTH - Tile.TILE_SIZE
-				&& map.getTileAt(((player.getX() + 32) / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
-						.getType() != Tile.TILE_WALL)
-			player.move(32, 0);
-
-		if (k == KeyEvent.VK_E && player.placeTrap()
-				&& map.getTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE))
-						.getType() == Tile.TILE_AIR)
+		if(k == KeyEvent.VK_W || k == KeyEvent.VK_UP)
 		{
-			map.setTileAt((player.getX() / Tile.TILE_SIZE), ((player.getY() + 32) / Tile.TILE_SIZE), new SpikeTile());
+			player.move(0, -32);
+		}
+		
+		if(k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT)
+		{
+			player.move(-32, 0);
+		}
+		
+		if(k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN)
+		{
+			player.move(0, 32);
+		}
+		
+		if(k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT)
+		{
+			player.move(32, 0);
 		}
 
 		if (k == KeyEvent.VK_ESCAPE)

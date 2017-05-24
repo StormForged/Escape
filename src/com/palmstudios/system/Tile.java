@@ -17,13 +17,15 @@ public abstract class Tile
 	public static final int TILE_SIZE = 32; /**< Size of a single tile (both width and height) */
 	
 	/** TILE TYPE CONSTANTS */
-	public static final int TILE_AIR	= 0;	/**< Air tile type */
-	public static final int TILE_TREASURE = 1; 	/**< Treasure tile type */
-	public static final int TILE_KEY	= 2;	/**< Key tile type */
-	public static final int TILE_STAIR =  3;	/**< Stair tile type */
-	public static final int TILE_WALL	= 4; 	/**< Wall tile type */
-	public static final int TILE_CORNER = 9;
-	public static final int TILE_SPIKE = 5;		/**< Spike tile type */
+	public static final int TILE_AIR		= 0;	/**< Air tile type */
+	public static final int TILE_TREASURE 	= 1; 	/**< Treasure tile type */
+	public static final int TILE_KEY		= 2;	/**< Key tile type */
+	public static final int TILE_STAIR 		= 3;	/**< Stair tile type */
+	public static final int TILE_WALL		= 4; 	/**< Wall tile type */
+	public static final int TILE_SPIKE 		= 5;	/**< Spike tile type */
+	public static final int TILE_WALLLEFT	= 6;
+	public static final int TILE_WALLRIGHT	= 7;
+	public static final int TILE_WALLSEG 	= 9;
 	
 	public int 		type; 	/**< The type of this tile */
 	public String 	name; 	/**< Name of this tile. Probably not worth bothering with */
