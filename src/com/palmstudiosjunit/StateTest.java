@@ -14,7 +14,7 @@ public class StateTest
 	public static void setUpClass() throws Exception
 	{	
 		gsm = new GameStateManager();
-    	gsm.loadState(new TestState(gsm));
+    	gsm.loadState(new PlayState(gsm));
 	}
 	
     @Before

@@ -45,7 +45,7 @@ public class SplashState extends GameState
 		
 		try
 		{
-			logo = ImageIO.read(new File("plogo.png"));
+			logo = ImageIO.read(new File("data/state/plogo.png"));
 		} 
 		catch (IOException e)
 		{
@@ -78,7 +78,6 @@ public class SplashState extends GameState
 		// Check if any key on the keyboard has been pressed.
 		if(k > 0)
 		{
-			gsm.loadState(new TestState(gsm));
 			gsm.changeState(GameStateManager.MENU_STATE);
 		}
 	}
