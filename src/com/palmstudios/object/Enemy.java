@@ -11,136 +11,195 @@ package com.palmstudios.object;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
-import com.palmstudios.state.TestState;
+import com.palmstudios.system.Art;
+import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
-import com.palmstudios.tile.AirTile;
-import com.palmstudios.tile.SpikeTile;
 
 /**
  * @author Curtis
  *
  */
-public class Enemy extends Entity{
+public class Enemy extends Entity
+{
 	
-	public Enemy(String name, int x, int y)
+	public static final int ANIM_TIME = 20;
+	
+	private Random 			rand;
+	
+	private final int 		NORTH  	= 1;
+	private final int 		EAST 	= 2;
+	private final int 		SOUTH 	= 3;
+	private final int 		WEST 	= 4;
+	
+	private int 			x;
+	private int 			y;
+	private int 			speed;
+	private int 			direction;
+	private BufferedImage 	currentFrame;
+	private int				animTimer;
+	private int				framePtr;
+	
+	private Player player; 
+	
+	// AI Variables
+	private boolean patrol;
+	
+	public Enemy(String name, Map map, Player player, int x, int y)
 	{
-		super(name, x, y);
+		super(name, map, x, y);
+		this.player = player;
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		
-		sprite = loadSprite("enemy.png");
+		rand = new Random();
+		
+		framePtr 	= 0;
+		animTimer 	= 0;
+		
+		speed = 32;
+		patrol 	= true;
 	}
-
-	private BufferedImage sprite;
-	private Random rand = new Random();
-	
-	private final int NORTH  = 1;
-	private final int EAST = 2;
-	private final int SOUTH = 3;
-	private final int WEST = 4;
-	
-	private int x = 32;
-	private int y = 64;
-	private int direction = 2;
-	private int slow = 0;
-	private int cooldown = 0;
-	private int nextMove = 0;
-	
-	private BufferedImage loadSprite(String path)
-	{	
-		try
-		{
-			return ImageIO.read(new File(path));
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // Load the image
-		return sprite;
-	}
-
 
 	@Override
 	public void update()
 	{
-		if(slow > 0){
-			sprite = loadSprite("enemyhurt.png");
-			if(nextMove > 0){
-				nextMove--;
-				return;
-			}else if(nextMove == 0){
-				nextMove = 2 * slow;
+		// Do Animation
+		currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
+		animTimer++;
+		
+		if(animTimer >= ANIM_TIME)
+		{
+			if(framePtr + 1 > 3)
+				framePtr = 0;
+			else
+				framePtr++;
+			
+			animTimer = 0;
+		}
+		else
+		{
+			return;
+		}
+		
+		// Do A.I
+		int dx = (player.getX() - x) / Tile.TILE_SIZE;
+		int dy = (player.getY() - y) / Tile.TILE_SIZE;
+		double tolerance = Math.sqrt((dx*dx) + (dy*dy));
+		
+		if(tolerance <= 6)
+			patrol = false;
+		else
+			patrol = true;
+		
+		if(patrol)
+		{
+			// TODO: Random movement here!
+			
+			int currX = (x / Tile.TILE_SIZE);
+			int currY = (y / Tile.TILE_SIZE);
+			int nextX = 0;
+			int nextY = 0;
+			Tile t;
+			
+			direction = rand.nextInt(4) + 1;
+			if(direction == NORTH)
+			{
+				nextY = currY;
 			}
-		}else
-			sprite = loadSprite("enemy.png");
-		switch(direction){
-			case 1:
-				if(TestState.map.getTileAt((x / Tile.TILE_SIZE), (y / Tile.TILE_SIZE)).getType() != Tile.TILE_WALL){
-					move(0, -1);
-				}else
-					direction = rand.nextInt(4) + 1;
-				break;
+			else if(direction == EAST)
+			{
+				nextX = currX + 1;
+			}
+			else if(direction == SOUTH)
+			{
+				nextY = currY + 2;
+			}
+			else if(direction == WEST)
+			{
+				nextX = currX - 1;
+			}
 			
-			case 2:
-				if(TestState.map.getTileAt(((x + 32) / Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE)).getType() != Tile.TILE_WALL){
-					move(1, 0);
-				}else
-					direction = rand.nextInt(4) + 1;
-				break;
-			case 3:
-				if(TestState.map.getTileAt((x / Tile.TILE_SIZE), ((y + 64) / Tile.TILE_SIZE)).getType() != Tile.TILE_WALL){
-					move(0, 1);
-				}else
-					direction = rand.nextInt(4) + 1;
-				break;
-			case 4:
-				if(TestState.map.getTileAt(((x - 32) / Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE)).getType() != Tile.TILE_WALL){
-					move(-1, 0);
-				}else
-					direction = rand.nextInt(4) + 1;
-				break;
-		}
-		
-		if(TestState.map.getTileAt((x / Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE)).getType() == Tile.TILE_SPIKE){
-			TestState.map.setTileAt((x/ Tile.TILE_SIZE), ((y + 32) / Tile.TILE_SIZE), new AirTile());
-			slow++;
-			nextMove = 2 * slow;
-			cooldown += 8;
-		}
-		
-		if(cooldown < 8 && slow > 1){
-			slow--;
-		}else if(cooldown == 0 && slow == 1){
-			slow--;
-		}
 			
-		if(cooldown > 0)
-			cooldown--;
+			if(map.getTileAt(nextX, currY).getType() == Tile.TILE_WALL)
+			{
+				// Try the next value
+				nextX = currX - 1;
+			}
+			
+			if(map.getTileAt(currX, nextY).getType() == Tile.TILE_WALL)
+			{
+				// Try the next value
+				nextY = currY;
+			}
+			
+			if(nextX > currX)
+				move(32, 0);
+			else if(nextX < currX)
+				move(-32, 0);
+			
+			if(nextY > currY)
+				move(0, 32);
+			else if(nextY < currY)
+				move(0, -32);
+		}
+		else // FOUND YA!
+		{
+			// Get Player's X and Y value (in tiles)
+			int pTx = player.getX() / Tile.TILE_SIZE;
+			int pTy = player.getY() / Tile.TILE_SIZE;;
+			int ourTx = x / Tile.TILE_SIZE;
+			int ourTy = y / Tile.TILE_SIZE;
+			
+			// Test each surrounding tile (in a one tile radius)
+			
+			// Move to player
+			if(dx > 0)
+			{
+				move(speed, 0);
+			}
+			else if(dx < 0)
+			{
+				move(-speed, 0);
+			}
+			
+			if(dy > 0)
+			{
+				move(0, speed);
+			}
+			else if(dy < 0)
+			{
+				move(0, -speed);
+			}
+			
+		}
+		//System.out.println("dx: " + dx + ", dy: " + dy + ", dist: " + tolerance);
 	}
 
 	@Override
 	public void draw(Graphics2D g2d)
 	{
-		// TODO Auto-generated method stub
-		g2d.drawImage(sprite, x, y, null);
-		if(cooldown > 0)
-			g2d.drawString("" + cooldown, x + 1, y - 2);
+		g2d.drawImage(currentFrame, x, y, null);
 	}
 
 	@Override
 	public void move(double vx, double vy)
 	{
-		// TODO Auto-generated method stub
-		x += vx * Tile.TILE_SIZE;
-		y += vy * Tile.TILE_SIZE;
+		int currX = (int)((x) / Tile.TILE_SIZE);
+		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
+		int nextX = (int)((x + vx) / Tile.TILE_SIZE);
+		int nextY = (int)((y + vy) / Tile.TILE_SIZE) + 1;
 		
+		System.out.println("currX: " + currX + ", currY: " + currY);
+		System.out.println("nextX: " + nextX + ", nextY: " + nextY);
+		
+		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
+			x += vx;
+		
+		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
+			y += vy;
 	}
 
 	@Override
@@ -150,7 +209,8 @@ public class Enemy extends Entity{
 	}
 	
 	@Override
-	public int getY(){
+	public int getY()
+	{
 		return y;
 	}
 }

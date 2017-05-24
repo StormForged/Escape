@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 /**
  * @author Curtis
@@ -24,11 +25,11 @@ import com.palmstudios.system.Tile;
 public class Player extends Entity{
 	public BufferedImage sprite;
 	
-	public boolean hit = false;
+	public boolean 	hit = false;
 
-	private int health;
+	private int 	health;
 	private boolean hasKey;
-	private int traps;
+	private int 	traps;
 	
 	public BufferedImage loadSprite(String path)
 	{	
@@ -43,61 +44,76 @@ public class Player extends Entity{
 		return sprite;
 	}
 	
-	public Player(String name, int x, int y, int health, boolean hasKey, int traps){
-		super(name, x, y);	
-		sprite = loadSprite("player.png");
+	public Player(String name, Map map)
+	{
+		super(name, map);
+	}
+	
+	public Player(String name, Map map, int x, int y, int health, boolean hasKey, int traps){
+		super(name, map, x, y);	
+		sprite = loadSprite("data/sprite/player.png");
 		this.health = health;
 		this.hasKey = hasKey;
 		this.traps = traps;
 	}
 
 	@Override
-	public void update(){
-		// TODO Auto-generated method stub
+	public void update()
+	{
 	}
 
 	@Override
-	public void draw(Graphics2D g2d){
+	public void draw(Graphics2D g2d)
+	{
 		g2d.drawImage(sprite, x, y, null);
 	}
 
 	@Override
-	public void move(double vx, double vy){
-		x += vx * Tile.TILE_SIZE;
-		y += vy * Tile.TILE_SIZE;
+	public void move(double vx, double vy)
+	{
+		x += vx;
+		y += vy;
 	}
 	
 	@Override
-	public int getX(){
+	public int getX()
+	{
 		return x;
 	}
 	
 	@Override
-	public int getY(){
+	public int getY()
+	{
 		return y;
 	}
 	
-	public int getHealth(){
+	public int getHealth()
+	{
 		return health;	
 	}
 	
-	public int getTraps(){
+	public int getTraps()
+	{
 		return health;
 	}
 	
-	public void hurtPlayer(int damage){
+	public void hurtPlayer(int damage)
+	{
 		health -= damage;
 	}
 	
-	public void setKey(){
+	public void setKey()
+	{
 		hasKey = true;
 	}
 	
-	public Boolean hasKey(){
+	public Boolean hasKey()
+	{
 		return hasKey;
 	}
 	
-	public Boolean placeTrap(){
+	public Boolean placeTrap()
+	{
 		if(traps > 0){
 			traps--;
 			return true;

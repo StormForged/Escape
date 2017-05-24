@@ -12,7 +12,7 @@ public class PlayerTest
 	@Before
 	public void setUp() throws Exception
 	{
-		player = new Player("Curtis");
+		player = new Player("Curtis", null, 0, 0, 5, false, 0);
 		player.move(2, 2);
 	}
 

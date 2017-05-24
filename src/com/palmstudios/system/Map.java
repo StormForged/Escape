@@ -39,7 +39,6 @@ public class Map
 	public Map()
 	{
 		map = new Tile[MAP_WIDTH][MAP_HEIGHT];
-		load("map.txt"); // Default to loading map.txt
 	}
 	
 	/**

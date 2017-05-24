@@ -20,12 +20,15 @@ public class Art
 {
 	
 	public static Image[][] tiles;
+	public static Image[][] enemyFrames;
 	
 	public static void init()
 	{
 		try
 		{
-			tiles = cut("tileset.png", 32, 32);
+			tiles = cut("data/tile/tileset.png", 32, 32);
+			enemyFrames = cut("data/sprite/enemy.png", 32, 64);
+			
 		} 
 		catch (IOException e)
 		{

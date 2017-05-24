@@ -44,7 +44,7 @@ public class MenuState extends GameState
 	{
 		try
 		{
-			logo = ImageIO.read(new File("menu.png"));
+			logo = ImageIO.read(new File("data/state/menu.png"));
 		} 
 		catch (IOException e)
 		{
@@ -84,8 +84,8 @@ public class MenuState extends GameState
 		{
 			if(selected == 0)
 			{
-				gsm.loadState(new TestState(gsm));
-				gsm.changeState(GameStateManager.TEST_STATE);
+				gsm.loadState(new PlayState(gsm));
+				gsm.changeState(GameStateManager.PLAY_STATE);
 			}
 			if(selected == 1)
 				System.exit(0);

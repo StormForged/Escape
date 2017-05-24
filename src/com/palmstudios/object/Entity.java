@@ -11,12 +11,15 @@ package com.palmstudios.object;
 
 import java.awt.Graphics2D;
 
+import com.palmstudios.system.Map;
+
 /**
  * @author Jesse
  *
  */
 public abstract class Entity
 {
+	protected Map		map;
 	protected String 	name; 		/**< The name of this entity */
 	protected int 		x; 			/**< What x value is this entity currently at? */ 
 	protected int 		y; 			/**< What y value is this entity currently at? */ 
@@ -26,11 +29,12 @@ public abstract class Entity
 	 * 
 	 * @param name - The name of this entity.
 	 */
-	public Entity(String name)
+	public Entity(String name, Map map)
 	{
 		this.name	= name;
 		this.x 		= 0;
 		this.y 		= 0;
+		this.map 	= map;
 	}
 	
 	/**
@@ -40,11 +44,12 @@ public abstract class Entity
 	 * @param x - Initial tile (x) of this entity
 	 * @param y - Initial tile (y) of this entity
 	 */
-	public Entity(String name, int x, int y)
+	public Entity(String name, Map map, int x, int y)
 	{
 		this.name	= name;
-		this.x 	= x;
-		this.y 	= y;
+		this.x 		= x;
+		this.y 		= y;
+		this.map 	= map;
 	}
 	
 	/**
