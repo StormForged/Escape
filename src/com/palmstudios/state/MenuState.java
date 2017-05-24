@@ -63,7 +63,7 @@ public class MenuState extends GameState
 	@Override
 	public void draw(Graphics2D g2d)
 	{
-		g2d.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		g2d.setFont(new Font("constantine", Font.PLAIN, 24));
 		g2d.drawImage(logo, 0, 0, logo.getWidth(), logo.getHeight(), null);
 		
 		for(int i = 0; i < options.length; i++)

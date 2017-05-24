@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import com.palmstudios.system.Audio;
 import com.palmstudios.system.GameState;
 
 public class DefeatState extends GameState
@@ -41,7 +42,8 @@ public class DefeatState extends GameState
 	@Override
 	public void init()
 	{
-		// TODO Auto-generated method stub
+		
+		Audio.playSound("data/go.wav");
 		load(scoreFile);
 		try
 		{

@@ -192,8 +192,8 @@ public class Enemy extends Entity
 		int nextX = (int)((x + vx) / Tile.TILE_SIZE);
 		int nextY = (int)((y + vy) / Tile.TILE_SIZE) + 1;
 		
-		System.out.println("currX: " + currX + ", currY: " + currY);
-		System.out.println("nextX: " + nextX + ", nextY: " + nextY);
+		//System.out.println("currX: " + currX + ", currY: " + currY);
+		//System.out.println("nextX: " + nextX + ", nextY: " + nextY);
 		
 		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
 			x += vx;

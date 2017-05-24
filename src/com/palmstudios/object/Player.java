@@ -16,8 +16,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.palmstudios.system.Audio;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
+import com.palmstudios.tile.AirTile;
 /**
  * @author Curtis
  *
@@ -60,6 +62,19 @@ public class Player extends Entity{
 	@Override
 	public void update()
 	{
+		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_KEY)
+		{
+			hasKey = true;
+			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
+			Audio.playSound("data/snd/pickup.wav");
+		}
+		
+		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_TREASURE && hasKey)
+		{
+			hasKey = true;
+			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
+			Audio.playSound("data/snd/spikey.wav");
+		}
 	}
 
 	@Override
@@ -71,8 +86,19 @@ public class Player extends Entity{
 	@Override
 	public void move(double vx, double vy)
 	{
-		x += vx;
-		y += vy;
+		int currX = (int)((x) / Tile.TILE_SIZE);
+		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
+		int nextX = (int)((x + vx) / Tile.TILE_SIZE);
+		int nextY = (int)((y + vy) / Tile.TILE_SIZE) + 1;
+		
+		//System.out.println("currX: " + currX + ", currY: " + currY);
+		//System.out.println("nextX: " + nextX + ", nextY: " + nextY);
+		
+		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
+			x += vx;
+		
+		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
+			y += vy;
 	}
 	
 	@Override

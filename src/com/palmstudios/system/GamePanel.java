@@ -10,11 +10,16 @@
 package com.palmstudios.system;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -118,6 +123,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 		gsm.changeState(GameStateManager.SPLASH_STATE);
 		
 		Art.init(); // Load all tilesheets
+		
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment(); 
+		try
+		{
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("data/fnt/constantine.ttf")));
+		} 
+		catch (FontFormatException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		running = true;
 	}
