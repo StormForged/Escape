@@ -80,7 +80,7 @@ public class PlayState extends GameState
 		map.draw(g2d);
 		
 		g2d.setColor(Color.WHITE);
-		g2d.drawString("Health: " + player.getHealth() + "     Time: " + time / 60 , 0, 32);
+		g2d.drawString("Health: " + player.getHealth() + "     Time: " + time / 60  + "     Traps: " + player.getTraps(), 0, 32);
 		
 		for(int i = 0; i < enemies.size(); i++)
 		{
@@ -110,6 +110,10 @@ public class PlayState extends GameState
 		if(k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT)
 		{
 			player.move(32, 0);
+		}
+		
+		if(k == KeyEvent.VK_E || k == KeyEvent.VK_SPACE){
+			player.placeTrap();
 		}
 
 		if (k == KeyEvent.VK_ESCAPE)

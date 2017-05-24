@@ -29,7 +29,7 @@ public class KeyTile extends Tile
 	@Override
 	public void draw(Graphics2D g2d, int x, int y)
 	{
-		g2d.drawImage(Art.tiles[3][2], x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, Tile.TILE_SIZE, Tile.TILE_SIZE, null);
+		g2d.drawImage(Art.tiles[3][3], x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, Tile.TILE_SIZE, Tile.TILE_SIZE, null);
 	}
 
 }
