@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import com.palmstudios.system.Art;
+import com.palmstudios.system.Audio;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 import com.palmstudios.tile.AirTile;
@@ -243,6 +244,7 @@ public class Enemy extends Entity
 		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
 		
 		if(map.getTileAt(currX, currY).getType() == Tile.TILE_SPIKE){
+			Audio.playSound("data/snd/scream.wav", 0);
 			slow ++;
 			wait = 2 * slow;
 			hurt += 10;
