@@ -21,11 +21,25 @@ public abstract class Tile
 	public static final int TILE_TREASURE 	= 1; 	/**< Treasure tile type */
 	public static final int TILE_KEY		= 2;	/**< Key tile type */
 	public static final int TILE_STAIR 		= 3;	/**< Stair tile type */
-	public static final int TILE_WALL		= 4; 	/**< Wall tile type */
 	public static final int TILE_SPIKE 		= 5;	/**< Spike tile type */
-	public static final int TILE_WALLLEFT	= 6;
-	public static final int TILE_WALLRIGHT	= 7;
-	public static final int TILE_WALLSEG 	= 9;
+	public static final int TILE_FREESPIKE	= 6;	/**< Spike to pick up */
+	public static final int WALL_LEFTTOP 		= 7;
+	public static final int WALL_LEFTBOTTOM 	= 8;
+	public static final int WALL_UP 			= 9;
+	public static final int WALL_CENTRE			= 10;
+	public static final int WALL_DOWNTOP		= 11;
+	public static final int TILE_WALL			= 12;
+	public static final int WALL_RIGHTTOP		= 13;
+	public static final int WALL_RIGHTBOTTOM	= 14;
+	public static final int WALL_HORIZONTAL		= 15;
+	public static final int WALL_VERTICAL		= 16;
+	public static final int WALL_EMPTY			= 17;
+	public static final int WALL_CORNER1		= 18;
+	public static final int WALL_CORNER2		= 19;
+	public static final int WALL_CORNER3		= 20;
+	public static final int WALL_CORNER4		= 21;
+
+	
 	
 	public int 		type; 	/**< The type of this tile */
 	public String 	name; 	/**< Name of this tile. Probably not worth bothering with */

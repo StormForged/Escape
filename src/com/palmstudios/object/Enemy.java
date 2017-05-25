@@ -16,6 +16,7 @@ import java.util.Random;
 import com.palmstudios.system.Art;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
+import com.palmstudios.tile.AirTile;
 
 /**
  * @author Curtis
@@ -40,6 +41,9 @@ public class Enemy extends Entity
 	private BufferedImage 	currentFrame;
 	private int				animTimer;
 	private int				framePtr;
+	private int				hurt;
+	private int				wait;
+	private int				slow;
 	
 	private Player player; 
 	
@@ -66,6 +70,20 @@ public class Enemy extends Entity
 	@Override
 	public void update()
 	{
+		// Check for traps
+		trapCheck();
+		
+		// Check if can move this update
+		
+		if(slow > 0){
+			if(wait > 0){
+				wait--;
+				return;
+			}else if(wait == 0){
+				wait = 2 * slow;
+			}
+		}
+		
 		// Do Animation
 		currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
 		animTimer++;
@@ -175,6 +193,16 @@ public class Enemy extends Entity
 			}
 			
 		}
+		
+		if(hurt < 20 && slow > 1){
+			slow--;
+		}else if(hurt == 0 && slow == 1){
+			slow--;
+		}
+		
+		if(hurt > 0){
+			hurt--;
+		}
 		//System.out.println("dx: " + dx + ", dy: " + dy + ", dist: " + tolerance);
 	}
 
@@ -182,6 +210,7 @@ public class Enemy extends Entity
 	public void draw(Graphics2D g2d)
 	{
 		g2d.drawImage(currentFrame, x, y, null);
+		g2d.drawString("" + wait, x, y);
 	}
 
 	@Override
@@ -201,7 +230,19 @@ public class Enemy extends Entity
 		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
 			y += vy;
 	}
-
+	
+	public void trapCheck(){
+		int currX = (int)((x) / Tile.TILE_SIZE);
+		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
+		
+		if(map.getTileAt(currX, currY).getType() == Tile.TILE_SPIKE){
+			slow ++;
+			wait = 2 * slow;
+			hurt += 20;
+			map.setTileAt(currX, currY, new AirTile()); //REALLY NAUGHTY!
+		}
+	}
+	
 	@Override
 	public int getX()
 	{

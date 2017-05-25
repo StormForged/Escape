@@ -14,9 +14,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.rmi.CORBA.Tie;
+
 import com.palmstudios.tile.AirTile;
 import com.palmstudios.tile.KeyTile;
 import com.palmstudios.tile.NullTile;
+import com.palmstudios.tile.SpikePickUp;
 import com.palmstudios.tile.SpikeTile;
 import com.palmstudios.tile.StairTile;
 import com.palmstudios.tile.TreasureTile;
@@ -89,28 +92,61 @@ public class Map
 						t = new AirTile();
 						break;
 					case Tile.TILE_WALL:
-						t = new WallTile(WallTile.WALL);
-						break;
-					case Tile.TILE_WALLSEG:
-						t = new WallTile(WallTile.WALL_SEG);
-						break;
-					case Tile.TILE_WALLLEFT:
-						t = new WallTile(WallTile.WALL_LEFT_SEG);
-						break;
-					case Tile.TILE_WALLRIGHT:
-						t = new WallTile(WallTile.WALL_RIGHT_SEG);
+						t = new WallTile(WallTile.WALL_DOWNBOTTOM);
 						break;
 					case Tile.TILE_KEY:
 						t = new KeyTile();
 						break;
-					case Tile.TILE_STAIR:
-						t = new StairTile();
+					case Tile.TILE_FREESPIKE:
+						t = new SpikePickUp();
 						break;
 					case Tile.TILE_TREASURE:
 						t = new TreasureTile();
 						break;
 					case Tile.TILE_SPIKE:
 						t = new SpikeTile();
+						break;
+					case Tile.WALL_LEFTTOP:
+						t = new WallTile(WallTile.WALL_LEFTTOP);
+						break;
+					case Tile.WALL_LEFTBOTTOM:
+						t = new WallTile(WallTile.WALL_LEFTBOTTOM);
+						break;
+					case Tile.WALL_UP:
+						t = new WallTile(WallTile.WALL_UP);
+						break;
+					case Tile.WALL_CENTRE:
+						t = new WallTile(WallTile.WALL_CENTRE);
+						break;
+					case Tile.WALL_DOWNTOP:
+						t = new WallTile(WallTile.WALL_DOWNTOP);
+						break;
+					case Tile.WALL_RIGHTTOP:
+						t = new WallTile(WallTile.WALL_RIGHTTOP);
+						break;
+					case Tile.WALL_RIGHTBOTTOM:
+						t = new WallTile(WallTile.WALL_RIGHTBOTTOM);
+						break;
+					case Tile.WALL_HORIZONTAL:
+						t = new WallTile(WallTile.WALL_HORIZONTAL);
+						break;
+					case Tile.WALL_VERTICAL:
+						t = new WallTile(WallTile.WALL_VERTICAL);
+						break;
+					case Tile.WALL_EMPTY:
+						t = new WallTile(WallTile.WALL_EMPTY);
+						break;
+					case Tile.WALL_CORNER1:
+						t = new WallTile(WallTile.WALL_CORNER1);
+						break;
+					case Tile.WALL_CORNER2:
+						t = new WallTile(WallTile.WALL_CORNER2);
+						break;
+					case Tile.WALL_CORNER3:
+						t = new WallTile(WallTile.WALL_CORNER3);
+						break;
+					case Tile.WALL_CORNER4:
+						t = new WallTile(WallTile.WALL_CORNER4);
 						break;
 					case 88:
 						t = new NullTile();

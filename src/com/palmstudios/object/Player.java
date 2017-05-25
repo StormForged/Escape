@@ -20,6 +20,7 @@ import com.palmstudios.system.Audio;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 import com.palmstudios.tile.AirTile;
+import com.palmstudios.tile.SpikeTile;
 /**
  * @author Curtis
  *
@@ -75,6 +76,12 @@ public class Player extends Entity{
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
 			Audio.playSound("data/snd/spikey.wav");
 		}
+		
+		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_FREESPIKE){
+			traps += 2;
+			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
+			Audio.playSound("data/snd/spikey.wav");
+		}
 	}
 
 	@Override
@@ -120,7 +127,7 @@ public class Player extends Entity{
 	
 	public int getTraps()
 	{
-		return health;
+		return traps;
 	}
 	
 	public void hurtPlayer(int damage)
@@ -140,8 +147,9 @@ public class Player extends Entity{
 	
 	public Boolean placeTrap()
 	{
-		if(traps > 0){
+		if(traps > 0 && map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() != Tile.TILE_SPIKE){
 			traps--;
+			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new SpikeTile()); //REALLY NAUGHTY!
 			return true;
 		}
 		
