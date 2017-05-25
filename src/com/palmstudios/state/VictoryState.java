@@ -32,9 +32,10 @@ public class VictoryState extends GameState
 		;
 	}
 
-	public VictoryState(GameStateManager gsm)
+	public VictoryState(GameStateManager gsm, int score)
 	{
 		this.gsm = gsm;
+		this.score = score;
 		init();
 	}
 
@@ -42,7 +43,6 @@ public class VictoryState extends GameState
 	public void init()
 	{
 		// TODO Auto-generated method stub
-		load(scoreFile);
 		try
 		{
 			logo = ImageIO.read(new File("data/state/victory.png"));

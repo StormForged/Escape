@@ -1,2 +1,2 @@
 time=6000
-health=5
+health=2

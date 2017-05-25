@@ -40,6 +40,7 @@ public class Player extends Entity{
 	private int		wait;
 	private int		slow;
 	private int		collisionTick;
+	private int		score = 0;
 	
 	public BufferedImage loadSprite(String path)
 	{	
@@ -83,19 +84,22 @@ public class Player extends Entity{
 			hasKey = true;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
 			Audio.playSound("data/snd/pickup.wav", 0);
+			score += 100;
 		}
 		
 		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_TREASURE && hasKey)
 		{
-			hasKey = true;
+			hasKey = false;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
 			Audio.playSound("data/snd/spikey.wav", 0);
+			score += 500;
 		}
 		
 		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_FREESPIKE){
 			traps += 2;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
 			Audio.playSound("data/snd/spikey.wav", 0);
+			score += 50;
 		}
 		
 		trapCheck();		
@@ -187,6 +191,11 @@ public class Player extends Entity{
 	public Boolean hasKey()
 	{
 		return hasKey;
+	}
+	
+	public int getScore()
+	{
+		return score;
 	}
 	
 	public Boolean placeTrap()
