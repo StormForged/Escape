@@ -82,20 +82,20 @@ public class Player extends Entity{
 		{
 			hasKey = true;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
-			Audio.playSound("data/snd/pickup.wav");
+			Audio.playSound("data/snd/pickup.wav", 0);
 		}
 		
 		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_TREASURE && hasKey)
 		{
 			hasKey = true;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
-			Audio.playSound("data/snd/spikey.wav");
+			Audio.playSound("data/snd/spikey.wav", 0);
 		}
 		
 		if(map.getTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1).getType() == Tile.TILE_FREESPIKE){
 			traps += 2;
 			map.setTileAt(x / Tile.TILE_SIZE, (y / Tile.TILE_SIZE) + 1, new AirTile()); //REALLY NAUGHTY!
-			Audio.playSound("data/snd/spikey.wav");
+			Audio.playSound("data/snd/spikey.wav", 0);
 		}
 		
 		trapCheck();		

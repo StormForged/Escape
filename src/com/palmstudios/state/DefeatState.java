@@ -43,7 +43,7 @@ public class DefeatState extends GameState
 	public void init()
 	{
 		
-		Audio.playSound("data/go.wav");
+		Audio.playSound("data/go.wav", 0);
 		load(scoreFile);
 		try
 		{
