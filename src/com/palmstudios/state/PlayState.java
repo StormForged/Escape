@@ -65,6 +65,10 @@ public class PlayState extends GameState
 			gsm.changeState(gsm.getNumberStates() - 1);
 		}
 		
+		if(player.getHealth() <= 0){
+			//Add defeat state here
+		}
+		
 		player.update();
 		
 		for(int i = 0; i < enemies.size(); i++)

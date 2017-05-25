@@ -21,6 +21,8 @@ public class Art
 	
 	public static Image[][] tiles;
 	public static Image[][] enemyFrames;
+	public static Image[][] enemyHurtFrames;
+	public static Image[][] enemyReallyHurtFrames;
 	
 	public static void init()
 	{
@@ -28,7 +30,8 @@ public class Art
 		{
 			tiles = cut("data/tile/tileset.png", 32, 32);
 			enemyFrames = cut("data/sprite/enemy.png", 32, 64);
-			
+			enemyHurtFrames = cut("data/sprite/enemyhurt.png", 32, 64);
+			enemyReallyHurtFrames = cut("data/sprite/enemyreallyhurt.png", 32, 64);
 		} 
 		catch (IOException e)
 		{

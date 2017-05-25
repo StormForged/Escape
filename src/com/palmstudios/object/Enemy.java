@@ -85,7 +85,13 @@ public class Enemy extends Entity
 		}
 		
 		// Do Animation
-		currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
+		if(hurt == 0){
+			currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
+		} else if (hurt > 1 && hurt <= 10){
+			currentFrame = (BufferedImage)Art.enemyHurtFrames[framePtr][0];
+		} else if (hurt > 10){
+			currentFrame = (BufferedImage)Art.enemyReallyHurtFrames[framePtr][0];
+		}
 		animTimer++;
 		
 		if(animTimer >= ANIM_TIME)
@@ -194,7 +200,7 @@ public class Enemy extends Entity
 			
 		}
 		
-		if(hurt < 20 && slow > 1){
+		if(hurt < 10 && slow > 1){
 			slow--;
 		}else if(hurt == 0 && slow == 1){
 			slow--;
@@ -203,6 +209,8 @@ public class Enemy extends Entity
 		if(hurt > 0){
 			hurt--;
 		}
+		
+		playerCollisionCheck();
 		//System.out.println("dx: " + dx + ", dy: " + dy + ", dist: " + tolerance);
 	}
 
@@ -210,7 +218,6 @@ public class Enemy extends Entity
 	public void draw(Graphics2D g2d)
 	{
 		g2d.drawImage(currentFrame, x, y, null);
-		g2d.drawString("" + wait, x, y);
 	}
 
 	@Override
@@ -238,8 +245,17 @@ public class Enemy extends Entity
 		if(map.getTileAt(currX, currY).getType() == Tile.TILE_SPIKE){
 			slow ++;
 			wait = 2 * slow;
-			hurt += 20;
+			hurt += 10;
 			map.setTileAt(currX, currY, new AirTile()); //REALLY NAUGHTY!
+		}
+	}
+	
+	public void playerCollisionCheck(){
+		if(player.getCollisionTick() == 0){
+			if(x == player.getX() && y == player.getY()){
+				player.hurtPlayer(1);
+				player.resetCollionsTick();
+			}
 		}
 	}
 	
