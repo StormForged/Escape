@@ -53,7 +53,7 @@ public class PlayState extends GameState
 		enemies.add(new Enemy("Goblin1", map, player, 32, 384));
 		//enemies.add(new Enemy("Goblin2", map, 32, 384));
 		
-		Audio.playSound("data/snd/start.wav");
+		Audio.playSound("data/snd/start.wav", 0);
 		time = GAME_TIME;
 	}
 
