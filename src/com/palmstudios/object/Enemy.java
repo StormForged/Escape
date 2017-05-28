@@ -148,13 +148,13 @@ public class Enemy extends Entity
 			}
 			
 			
-			if(map.getTileAt(nextX, currY).getType() == Tile.TILE_WALL)
+			if(map.getTileAt(nextX, currY).getType() >= Tile.WALL_LEFTTOP )
 			{
 				// Try the next value
 				nextX = currX - 1;
 			}
 			
-			if(map.getTileAt(currX, nextY).getType() == Tile.TILE_WALL)
+			if(map.getTileAt(currX, nextY).getType() >= Tile.WALL_LEFTTOP )
 			{
 				// Try the next value
 				nextY = currY;
@@ -232,10 +232,10 @@ public class Enemy extends Entity
 		//System.out.println("currX: " + currX + ", currY: " + currY);
 		//System.out.println("nextX: " + nextX + ", nextY: " + nextY);
 		
-		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(nextX, currY).getType() <= 7)
 			x += vx;
 		
-		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(currX, nextY).getType() <= Tile.WALL_LEFTTOP )
 			y += vy;
 	}
 	
@@ -243,7 +243,7 @@ public class Enemy extends Entity
 		int currX = (int)((x) / Tile.TILE_SIZE);
 		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
 		
-		if(map.getTileAt(currX, currY).getType() == Tile.TILE_SPIKE){
+		if(map.getTileAt(currX, currY).getType() == Tile.WALL_LEFTTOP ){
 			Audio.playSound("data/snd/scream.wav", 0);
 			slow ++;
 			wait = 2 * slow;

@@ -141,10 +141,10 @@ public class Player extends Entity{
 		//System.out.println("currX: " + currX + ", currY: " + currY);
 		//System.out.println("nextX: " + nextX + ", nextY: " + nextY);
 		
-		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(nextX, currY).getType() < 7)
 			x += vx;
 		
-		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(currX, nextY).getType() < 7)
 			y += vy;
 	}
 	
