@@ -32,6 +32,12 @@ public class WallTile extends Tile
 	public static final int WALL_CORNER2		= 12;
 	public static final int WALL_CORNER3		= 13;
 	public static final int WALL_CORNER4		= 14;
+	public static final int WALL_LEFTVERTICAL	= 15;
+	public static final int WALL_RIGHTVERTICAL  = 16;
+	public static final int WALL_BORDERBOTTOM	= 17;
+	public static final int WALL_BORDERTOP		= 18;
+	public static final int WALL_BORDERLEFT		= 19;
+	public static final int WALL_BORDERRIGHT	= 20;
 	
 	private Image 			sprite;	/**< The sprite of this wall tile */
 	
@@ -85,6 +91,24 @@ public class WallTile extends Tile
 			break;
 		case WALL_CORNER4:
 			sprite = Art.tiles[5][1];
+			break;
+		case WALL_LEFTVERTICAL:
+			sprite = Art.tiles[4][2];
+			break;
+		case WALL_RIGHTVERTICAL:
+			sprite = Art.tiles[5][2];
+			break;
+		case WALL_BORDERBOTTOM:
+			sprite = Art.tiles[6][0];
+			break;
+		case WALL_BORDERTOP:
+			sprite = Art.tiles[7][0];
+			break;
+		case WALL_BORDERLEFT:
+			sprite = Art.tiles[7][1];
+			break;
+		case WALL_BORDERRIGHT:
+			sprite = Art.tiles[6][1];
 			break;
 		default: // If we get here we're in a bit of trouble....
 			System.err.println("Invalid Wall Type!!");

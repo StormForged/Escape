@@ -148,6 +148,24 @@ public class Map
 					case Tile.WALL_CORNER4:
 						t = new WallTile(WallTile.WALL_CORNER4);
 						break;
+					case Tile.WALL_LEFTVERTICAL:
+						t = new WallTile(WallTile.WALL_LEFTVERTICAL);
+						break;
+					case Tile.WALL_RIGHTVERTICAL:
+						t = new WallTile(WallTile.WALL_RIGHTVERTICAL);
+						break;
+					case Tile.WALL_BORDERBOTTOM:
+						t = new WallTile(WallTile.WALL_BORDERBOTTOM);
+						break;
+					case Tile.WALL_BORDERTOP:
+						t = new WallTile(WallTile.WALL_BORDERTOP);
+						break;
+					case Tile.WALL_BORDERLEFT:
+						t = new WallTile(WallTile.WALL_BORDERLEFT);
+						break;
+					case Tile.WALL_BORDERRIGHT:
+						t = new WallTile(WallTile.WALL_BORDERRIGHT);
+						break;
 					case 88:
 						t = new NullTile();
 						break;
