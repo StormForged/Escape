@@ -9,17 +9,13 @@
  */
 package com.palmstudios.state;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -43,7 +39,7 @@ public class MenuState extends GameState
 	
 	private UserDatFile 	users;
 	
-	private String[] admin_opts 	= {"New Game", "Options", "Users", "Credits", "Quit"};
+	private String[] admin_opts 	= {"New Game", "Options", "Users", "Map Editor", "Credits", "Quit"};
 	private String[] play_opts 		= {"New Game", "Credits", "Quit"};
 	private String[] options	 	= {"Register", "Login", "Credits", "Quit"};
 
@@ -80,6 +76,7 @@ public class MenuState extends GameState
 	@Override
 	public void draw(Graphics2D g2d)
 	{
+		g2d.setColor(Color.WHITE);
 		g2d.setFont(new Font("constantine", Font.PLAIN, 24));
 		g2d.drawImage(logo, 0, 0, logo.getWidth(), logo.getHeight(), null);
 		
@@ -213,11 +210,17 @@ public class MenuState extends GameState
 				
 				if(selected == 3)
 				{
-					gsm.loadState(new CreditsState(gsm));
+					gsm.loadState(new MapEditorState(gsm));
 					gsm.changeState(gsm.getNumberStates() - 1);
 				}
 				
 				if(selected == 4)
+				{
+					gsm.loadState(new CreditsState(gsm));
+					gsm.changeState(gsm.getNumberStates() - 1);
+				}
+				
+				if(selected == 5)
 				{
 					System.exit(0);
 				}
