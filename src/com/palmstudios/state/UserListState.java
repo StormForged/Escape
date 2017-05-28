@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import com.palmstudios.system.GamePanel;
 import com.palmstudios.system.GameState;
+import com.palmstudios.system.UserDatFile;
 
 /**
  * @author Jesse
@@ -29,7 +30,7 @@ import com.palmstudios.system.GameState;
  */
 public class UserListState extends GameState
 {
-	private HashMap<String, String> users = null;
+	private UserDatFile users;
 	private int selected;
 	
 	public UserListState(GameStateManager gsm)
@@ -38,26 +39,17 @@ public class UserListState extends GameState
 		init();
 	}
 	
+	public UserListState(GameStateManager gsm, UserDatFile users)
+	{
+		this.gsm = gsm;
+		this.users = users;
+		init();
+	}
+	
 	public void init()
 	{
 		selected = 0;
-		
-		// Read in the user text file and map each user
-		try
-		{		
-			FileInputStream 	f = new FileInputStream("users.dat");
-			ObjectInputStream 	ois = new ObjectInputStream(f);
-			users = (HashMap<String, String>)ois.readObject();
-			ois.close();
-			f.close();
-		}
-		catch(IOException ex)
-		{
-			
-		} catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+
 		
 	}
 
@@ -80,7 +72,7 @@ public class UserListState extends GameState
 		g2d.setFont(new Font("constantine", Font.PLAIN, 22));
 		g2d.setColor(Color.WHITE);
 		
-		for(String s: users.keySet())
+		for(String s: users.getUsernames())
 		{
 			if(i == selected)
 			{
@@ -106,7 +98,7 @@ public class UserListState extends GameState
 		
 		if(k == KeyEvent.VK_DOWN)
 		{
-			if(selected < users.size())
+			if(selected < users.numUsers())
 			{
 				selected++;
 			}
@@ -117,25 +109,12 @@ public class UserListState extends GameState
 			int i = 0;
 			
 			// HACK HACK HACK HACK!
-			for(String s: users.keySet())
+			for(String s: users.getUsernames())
 			{
 				if(i == selected)
 				{
 					users.remove(s);
-					
-					try
-					{
-						FileOutputStream 	f = new FileOutputStream("users.dat");
-						ObjectOutputStream 	oos = new ObjectOutputStream(f);
-						oos.writeObject(users);
-						oos.close();
-						f.close();
-					}
-					catch(IOException ex)
-					{
-						
-					}
-					
+
 					return;
 				}
 				
