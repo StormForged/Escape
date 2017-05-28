@@ -14,7 +14,12 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -35,9 +40,11 @@ public class MenuState extends GameState
 	private boolean 		login = false;
 	private String			playerName;
 	
-	private String[] admin_opts 	= {"New Game", "Options", "Credits", "Quit"};
+	private HashMap<String, String> users;
+	
+	private String[] admin_opts 	= {"New Game", "Options", "Users", "Credits", "Quit"};
 	private String[] play_opts 		= {"New Game", "Credits", "Quit"};
-	private String[] options	 	= {"Login", "Credits", "Quit"};
+	private String[] options	 	= {"Register", "Login", "Credits", "Quit"};
 
 	public MenuState(GameStateManager gsm)
 	{
@@ -48,13 +55,32 @@ public class MenuState extends GameState
 	@Override
 	public void init()
 	{
+		users = new HashMap<String, String>();
+		// Read in the user text file and map each user
+		try
+		{		
+			FileInputStream 	f = new FileInputStream("users.dat");
+			ObjectInputStream 	ois = new ObjectInputStream(f);
+			users = (HashMap<String, String>)ois.readObject();
+			ois.close();
+			f.close();
+		}
+		catch(IOException ex)
+		{
+			
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Load main menu logo
 		try
 		{
 			logo = ImageIO.read(new File("data/state/menu.png"));
 		} 
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -62,7 +88,6 @@ public class MenuState extends GameState
 	@Override
 	public void update()
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -117,31 +142,56 @@ public class MenuState extends GameState
 		{
 			if(k == KeyEvent.VK_ENTER)
 			{
-				if(selected == 0)
+				if(selected == 0) // User registration
 				{
-					playerName = JOptionPane.showInputDialog("Please enter your name");
-					if(playerName.trim().equals(""))
+					String uname  = JOptionPane.showInputDialog("Please enter your name");
+					String pw = JOptionPane.showInputDialog("Please enter your password");
+					
+					if(uname == null || pw == null)
+						return;
+					
+					users.put(uname, pw);
+					
+					try
 					{
+						FileOutputStream 	f = new FileOutputStream("users.dat");
+						ObjectOutputStream 	oos = new ObjectOutputStream(f);
+						oos.writeObject(users);
+						oos.close();
+						f.close();
+					}
+					catch(IOException ex)
+					{
+						
+					}
+				}
+				if(selected == 1) // User Login
+				{
+					String uname = JOptionPane.showInputDialog("Please enter your name");
+					String pw = JOptionPane.showInputDialog("Please enter your name");
+					
+					if(!users.get(uname).equals(pw))
+					{
+						JOptionPane.showMessageDialog(null, "Incorrect username or password!");
 						return;
 					}
-					else if(playerName.toLowerCase().equals("admin"))
+					
+					if(users.get(uname).equals(pw))
 					{
-						login = false;
-						admin = true;
-					}
-					else
-					{
-						login = true;
+						if(uname.equals("admin"))
+							admin = true;
+						else 
+							login = true;
 					}
 				}
 				
-				if(selected == 1)
+				if(selected == 2)
 				{
 					gsm.loadState(new CreditsState(gsm));
 					gsm.changeState(gsm.getNumberStates() - 1);
 				}
 				
-				if(selected == 2)
+				if(selected == 3)
 				{
 					System.exit(0);
 				}
@@ -175,11 +225,17 @@ public class MenuState extends GameState
 				
 				if(selected == 2)
 				{
-					gsm.loadState(new CreditsState(gsm));
+					gsm.loadState(new UserListState(gsm));
 					gsm.changeState(gsm.getNumberStates() - 1);
 				}
 				
 				if(selected == 3)
+				{
+					gsm.loadState(new CreditsState(gsm));
+					gsm.changeState(gsm.getNumberStates() - 1);
+				}
+				
+				if(selected == 4)
 				{
 					System.exit(0);
 				}

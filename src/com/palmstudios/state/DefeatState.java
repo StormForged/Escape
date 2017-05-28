@@ -1,6 +1,7 @@
 package com.palmstudios.state;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -73,8 +74,11 @@ public class DefeatState extends GameState
 	@Override
 	public void keyPressed(int k)
 	{
-		// TODO Auto-generated method stub
-
+		if(k == KeyEvent.VK_ESCAPE)
+		{
+			gsm.unloadState(gsm.getNumberStates() - 1);
+			gsm.changeState(GameStateManager.MENU_STATE);
+		}
 	}
 
 	@Override
