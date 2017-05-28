@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import com.palmstudios.system.GameState;
+import com.palmstudios.system.UserDatFile;
 
 /**
  * @author Jesse
@@ -40,7 +41,7 @@ public class MenuState extends GameState
 	private boolean 		login = false;
 	private String			playerName;
 	
-	private HashMap<String, String> users;
+	private UserDatFile 	users;
 	
 	private String[] admin_opts 	= {"New Game", "Options", "Users", "Credits", "Quit"};
 	private String[] play_opts 		= {"New Game", "Credits", "Quit"};
@@ -55,24 +56,9 @@ public class MenuState extends GameState
 	@Override
 	public void init()
 	{
-		users = new HashMap<String, String>();
-		// Read in the user text file and map each user
-		try
-		{		
-			FileInputStream 	f = new FileInputStream("users.dat");
-			ObjectInputStream 	ois = new ObjectInputStream(f);
-			users = (HashMap<String, String>)ois.readObject();
-			ois.close();
-			f.close();
-		}
-		catch(IOException ex)
-		{
-			
-		} catch (ClassNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		users = new UserDatFile();
+		
+		users.read();
 		
 		// Load main menu logo
 		try
@@ -150,7 +136,7 @@ public class MenuState extends GameState
 					if(uname == null || pw == null)
 						return;
 					
-					users.put(uname, pw);
+					users.add(uname, pw);
 					
 					try
 					{
@@ -168,15 +154,23 @@ public class MenuState extends GameState
 				if(selected == 1) // User Login
 				{
 					String uname = JOptionPane.showInputDialog("Please enter your name");
-					String pw = JOptionPane.showInputDialog("Please enter your name");
 					
-					if(!users.get(uname).equals(pw))
+					if(!users.userExists(uname))
+					{
+						JOptionPane.showMessageDialog(null, "Username " + uname + " does not exist!\nPlease register first!" );
+						return;
+					}
+					
+					String pw = JOptionPane.showInputDialog("Please enter password for: " + uname);
+					
+
+					if(!users.getPassword(uname).equals(pw))
 					{
 						JOptionPane.showMessageDialog(null, "Incorrect username or password!");
 						return;
 					}
 					
-					if(users.get(uname).equals(pw))
+					if(users.getPassword(uname).equals(pw))
 					{
 						if(uname.equals("admin"))
 							admin = true;
@@ -225,7 +219,7 @@ public class MenuState extends GameState
 				
 				if(selected == 2)
 				{
-					gsm.loadState(new UserListState(gsm));
+					gsm.loadState(new UserListState(gsm, users));
 					gsm.changeState(gsm.getNumberStates() - 1);
 				}
 				
