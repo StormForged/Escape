@@ -41,9 +41,9 @@ public class WallTile extends Tile
 	
 	private Image 			sprite;	/**< The sprite of this wall tile */
 	
-	public WallTile(int wallType)
+	public WallTile(int wallType, int tileType)
 	{
-		super(Tile.TILE_WALL, true, "Wall");
+		super(tileType, true, "Wall");
 		
 		switch(wallType)
 		{

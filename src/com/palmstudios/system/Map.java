@@ -92,7 +92,7 @@ public class Map
 						t = new AirTile();
 						break;
 					case Tile.TILE_WALL:
-						t = new WallTile(WallTile.WALL_DOWNBOTTOM);
+						t = new WallTile(WallTile.WALL_DOWNBOTTOM, id);
 						break;
 					case Tile.TILE_KEY:
 						t = new KeyTile();
@@ -107,64 +107,64 @@ public class Map
 						t = new SpikeTile();
 						break;
 					case Tile.WALL_LEFTTOP:
-						t = new WallTile(WallTile.WALL_LEFTTOP);
+						t = new WallTile(WallTile.WALL_LEFTTOP, id);
 						break;
 					case Tile.WALL_LEFTBOTTOM:
-						t = new WallTile(WallTile.WALL_LEFTBOTTOM);
+						t = new WallTile(WallTile.WALL_LEFTBOTTOM, id);
 						break;
 					case Tile.WALL_UP:
-						t = new WallTile(WallTile.WALL_UP);
+						t = new WallTile(WallTile.WALL_UP, id);
 						break;
 					case Tile.WALL_CENTRE:
-						t = new WallTile(WallTile.WALL_CENTRE);
+						t = new WallTile(WallTile.WALL_CENTRE, id);
 						break;
 					case Tile.WALL_DOWNTOP:
-						t = new WallTile(WallTile.WALL_DOWNTOP);
+						t = new WallTile(WallTile.WALL_DOWNTOP, id);
 						break;
 					case Tile.WALL_RIGHTTOP:
-						t = new WallTile(WallTile.WALL_RIGHTTOP);
+						t = new WallTile(WallTile.WALL_RIGHTTOP, id);
 						break;
 					case Tile.WALL_RIGHTBOTTOM:
-						t = new WallTile(WallTile.WALL_RIGHTBOTTOM);
+						t = new WallTile(WallTile.WALL_RIGHTBOTTOM, id);
 						break;
 					case Tile.WALL_HORIZONTAL:
-						t = new WallTile(WallTile.WALL_HORIZONTAL);
+						t = new WallTile(WallTile.WALL_HORIZONTAL, id);
 						break;
 					case Tile.WALL_VERTICAL:
-						t = new WallTile(WallTile.WALL_VERTICAL);
+						t = new WallTile(WallTile.WALL_VERTICAL, id);
 						break;
 					case Tile.WALL_EMPTY:
-						t = new WallTile(WallTile.WALL_EMPTY);
+						t = new WallTile(WallTile.WALL_EMPTY, id);
 						break;
 					case Tile.WALL_CORNER1:
-						t = new WallTile(WallTile.WALL_CORNER1);
+						t = new WallTile(WallTile.WALL_CORNER1, id);
 						break;
 					case Tile.WALL_CORNER2:
-						t = new WallTile(WallTile.WALL_CORNER2);
+						t = new WallTile(WallTile.WALL_CORNER2, id);
 						break;
 					case Tile.WALL_CORNER3:
-						t = new WallTile(WallTile.WALL_CORNER3);
+						t = new WallTile(WallTile.WALL_CORNER3, id);
 						break;
 					case Tile.WALL_CORNER4:
-						t = new WallTile(WallTile.WALL_CORNER4);
+						t = new WallTile(WallTile.WALL_CORNER4, id);
 						break;
 					case Tile.WALL_LEFTVERTICAL:
-						t = new WallTile(WallTile.WALL_LEFTVERTICAL);
+						t = new WallTile(WallTile.WALL_LEFTVERTICAL, id);
 						break;
 					case Tile.WALL_RIGHTVERTICAL:
-						t = new WallTile(WallTile.WALL_RIGHTVERTICAL);
+						t = new WallTile(WallTile.WALL_RIGHTVERTICAL, id);
 						break;
 					case Tile.WALL_BORDERBOTTOM:
-						t = new WallTile(WallTile.WALL_BORDERBOTTOM);
+						t = new WallTile(WallTile.WALL_BORDERBOTTOM, id);
 						break;
 					case Tile.WALL_BORDERTOP:
-						t = new WallTile(WallTile.WALL_BORDERTOP);
+						t = new WallTile(WallTile.WALL_BORDERTOP, id);
 						break;
 					case Tile.WALL_BORDERLEFT:
-						t = new WallTile(WallTile.WALL_BORDERLEFT);
+						t = new WallTile(WallTile.WALL_BORDERLEFT, id);
 						break;
 					case Tile.WALL_BORDERRIGHT:
-						t = new WallTile(WallTile.WALL_BORDERRIGHT);
+						t = new WallTile(WallTile.WALL_BORDERRIGHT, id);
 						break;
 					case 88:
 						t = new NullTile();
