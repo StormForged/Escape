@@ -72,6 +72,8 @@ public class UserListState extends GameState
 		g2d.setFont(new Font("constantine", Font.PLAIN, 22));
 		g2d.setColor(Color.WHITE);
 		
+		g2d.drawString("Press DEL to remove user from user list", 10, 440);
+		
 		for(String s: users.getUsernames())
 		{
 			if(i == selected)
@@ -113,6 +115,9 @@ public class UserListState extends GameState
 			{
 				if(i == selected)
 				{
+					if(s.toLowerCase().equals("admin"))
+						return;
+					
 					users.remove(s);
 
 					return;
