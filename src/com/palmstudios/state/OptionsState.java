@@ -79,6 +79,7 @@ public class OptionsState extends GameState
 	@Override
 	public void draw(Graphics2D g2d)
 	{
+		int i = 0;
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		
@@ -89,10 +90,16 @@ public class OptionsState extends GameState
 		g2d.setFont(new Font("constantine", Font.PLAIN, 22));
 		g2d.setColor(Color.WHITE);
 		
-		for(int i = 0; i < options.size(); i++)
+		for(String s: options.keySet())
 		{
-			g2d.drawString("Game Time: " + options.get("time"), 14, 120);
-			g2d.drawString("Health: " + options.get("health"), 14, 120 + g2d.getFontMetrics().getHeight());
+			if(i == selected)
+			{
+				g2d.drawString("-> " + s + ": " + options.get(s), 14, 120 + ( g2d.getFontMetrics().getHeight() * i));
+				i++;
+				continue;
+			}
+			g2d.drawString(s + ": " + options.get(s), 14, 120 + ( g2d.getFontMetrics().getHeight() * i));
+			i++;
 		}
 	}
 
@@ -140,36 +147,37 @@ public class OptionsState extends GameState
 		{
 			if(selected == 0)
 			{
-				int t = options.get("time");
-				if(t > 0)
-					t -= 100;
-				options.put("time", t);
-			}
-			
-			if(selected == 1)
-			{
 				int h = options.get("health");
 				if(h > 1)
 					h -= 1;
 				options.put("health", h);
 			}
+			
+			if(selected == 1)
+			{
+				int t = options.get("time");
+				if(t > 0)
+					t -= 100;
+				options.put("time", t);
+			}
+
 		}
 		
 		if(k == KeyEvent.VK_RIGHT)
 		{
 			if(selected == 0)
 			{
-				int t = options.get("time");
-				t += 100;
-				options.put("time", t);
-			}
-			
-			if(selected == 1)
-			{
 				int h = options.get("health");
 				if(h < 10)
 					h += 1;
 				options.put("health", h);
+			}
+			
+			if(selected == 1)
+			{
+				int t = options.get("time");
+				t += 100;
+				options.put("time", t);
 			}
 		}
 	}
