@@ -137,19 +137,7 @@ public class MenuState extends GameState
 						return;
 					
 					users.add(uname, pw);
-					
-					try
-					{
-						FileOutputStream 	f = new FileOutputStream("users.dat");
-						ObjectOutputStream 	oos = new ObjectOutputStream(f);
-						oos.writeObject(users);
-						oos.close();
-						f.close();
-					}
-					catch(IOException ex)
-					{
-						
-					}
+					users.write();
 				}
 				if(selected == 1) // User Login
 				{
