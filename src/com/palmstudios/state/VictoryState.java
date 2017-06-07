@@ -1,6 +1,7 @@
 package com.palmstudios.state;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +33,10 @@ public class VictoryState extends GameState
 		;
 	}
 
-	public VictoryState(GameStateManager gsm)
+	public VictoryState(GameStateManager gsm, int score)
 	{
 		this.gsm = gsm;
+		this.score = score;
 		init();
 	}
 
@@ -42,7 +44,6 @@ public class VictoryState extends GameState
 	public void init()
 	{
 		// TODO Auto-generated method stub
-		load(scoreFile);
 		try
 		{
 			logo = ImageIO.read(new File("data/state/victory.png"));
@@ -71,8 +72,11 @@ public class VictoryState extends GameState
 	@Override
 	public void keyPressed(int k)
 	{
-		// TODO Auto-generated method stub
-
+		if(k == KeyEvent.VK_ESCAPE)
+		{
+			gsm.unloadState(gsm.getNumberStates() - 1);
+			gsm.changeState(GameStateManager.MENU_STATE);
+		}
 	}
 
 	@Override

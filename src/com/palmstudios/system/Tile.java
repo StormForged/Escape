@@ -38,6 +38,12 @@ public abstract class Tile
 	public static final int WALL_CORNER2		= 19;
 	public static final int WALL_CORNER3		= 20;
 	public static final int WALL_CORNER4		= 21;
+	public static final int WALL_LEFTVERTICAL	= 22;
+	public static final int WALL_RIGHTVERTICAL  = 23;
+	public static final int WALL_BORDERBOTTOM	= 24;
+	public static final int WALL_BORDERTOP		= 25;
+	public static final int WALL_BORDERLEFT		= 26;
+	public static final int WALL_BORDERRIGHT	= 27;
 
 	
 	

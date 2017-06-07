@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import com.palmstudios.system.Art;
+import com.palmstudios.system.Audio;
 import com.palmstudios.system.Map;
 import com.palmstudios.system.Tile;
 import com.palmstudios.tile.AirTile;
@@ -85,7 +86,13 @@ public class Enemy extends Entity
 		}
 		
 		// Do Animation
-		currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
+		if(hurt == 0){
+			currentFrame = (BufferedImage)Art.enemyFrames[framePtr][0];
+		} else if (hurt > 1 && hurt <= 10){
+			currentFrame = (BufferedImage)Art.enemyHurtFrames[framePtr][0];
+		} else if (hurt > 10){
+			currentFrame = (BufferedImage)Art.enemyReallyHurtFrames[framePtr][0];
+		}
 		animTimer++;
 		
 		if(animTimer >= ANIM_TIME)
@@ -141,13 +148,13 @@ public class Enemy extends Entity
 			}
 			
 			
-			if(map.getTileAt(nextX, currY).getType() == Tile.TILE_WALL)
+			if(map.getTileAt(nextX, currY).getType() >= Tile.WALL_LEFTTOP )
 			{
 				// Try the next value
 				nextX = currX - 1;
 			}
 			
-			if(map.getTileAt(currX, nextY).getType() == Tile.TILE_WALL)
+			if(map.getTileAt(currX, nextY).getType() >= Tile.WALL_LEFTTOP )
 			{
 				// Try the next value
 				nextY = currY;
@@ -194,7 +201,7 @@ public class Enemy extends Entity
 			
 		}
 		
-		if(hurt < 20 && slow > 1){
+		if(hurt < 10 && slow > 1){
 			slow--;
 		}else if(hurt == 0 && slow == 1){
 			slow--;
@@ -203,6 +210,8 @@ public class Enemy extends Entity
 		if(hurt > 0){
 			hurt--;
 		}
+		
+		playerCollisionCheck();
 		//System.out.println("dx: " + dx + ", dy: " + dy + ", dist: " + tolerance);
 	}
 
@@ -210,7 +219,6 @@ public class Enemy extends Entity
 	public void draw(Graphics2D g2d)
 	{
 		g2d.drawImage(currentFrame, x, y, null);
-		g2d.drawString("" + wait, x, y);
 	}
 
 	@Override
@@ -224,10 +232,10 @@ public class Enemy extends Entity
 		//System.out.println("currX: " + currX + ", currY: " + currY);
 		//System.out.println("nextX: " + nextX + ", nextY: " + nextY);
 		
-		if(map.getTileAt(nextX, currY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(nextX, currY).getType() <= 7)
 			x += vx;
 		
-		if(map.getTileAt(currX, nextY).getType() != Tile.TILE_WALL)
+		if(map.getTileAt(currX, nextY).getType() <= Tile.WALL_LEFTTOP )
 			y += vy;
 	}
 	
@@ -235,11 +243,21 @@ public class Enemy extends Entity
 		int currX = (int)((x) / Tile.TILE_SIZE);
 		int currY = (int)((y) / Tile.TILE_SIZE) + 1;
 		
-		if(map.getTileAt(currX, currY).getType() == Tile.TILE_SPIKE){
+		if(map.getTileAt(currX, currY).getType() == Tile.WALL_LEFTTOP ){
+			Audio.playSound("data/snd/scream.wav", 0);
 			slow ++;
 			wait = 2 * slow;
-			hurt += 20;
+			hurt += 10;
 			map.setTileAt(currX, currY, new AirTile()); //REALLY NAUGHTY!
+		}
+	}
+	
+	public void playerCollisionCheck(){
+		if(player.getCollisionTick() == 0){
+			if(x == player.getX() && y == player.getY()){
+				player.hurtPlayer(1);
+				player.resetCollionsTick();
+			}
 		}
 	}
 	

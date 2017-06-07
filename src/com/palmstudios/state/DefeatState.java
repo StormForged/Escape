@@ -1,6 +1,7 @@
 package com.palmstudios.state;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +34,10 @@ public class DefeatState extends GameState
 		;
 	}
 
-	public DefeatState(GameStateManager gsm)
+	public DefeatState(GameStateManager gsm, int score)
 	{
 		this.gsm = gsm;
+		this.score = score;
 		init();
 	}
 
@@ -43,11 +45,10 @@ public class DefeatState extends GameState
 	public void init()
 	{
 		
-		Audio.playSound("data/go.wav");
-		load(scoreFile);
+		Audio.playSound("data/snd/go.wav", 0);
 		try
 		{
-			logo = ImageIO.read(new File("defeat.png"));
+			logo = ImageIO.read(new File("data/state/defeat.png"));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -67,14 +68,17 @@ public class DefeatState extends GameState
 	{
 		// TODO Auto-generated method stub
 		g2d.drawImage(logo, 0, 0, logo.getWidth(), logo.getHeight(), null);
-		g2d.drawString("Score: " + score, 200, 200);
+		g2d.drawString("Score: " + score, 200, 300);
 	}
 
 	@Override
 	public void keyPressed(int k)
 	{
-		// TODO Auto-generated method stub
-
+		if(k == KeyEvent.VK_ESCAPE)
+		{
+			gsm.unloadState(gsm.getNumberStates() - 1);
+			gsm.changeState(GameStateManager.MENU_STATE);
+		}
 	}
 
 	@Override
